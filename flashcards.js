@@ -3,31 +3,33 @@ const frontEl = flashcardEl.querySelector('.front');
 const backEl = flashcardEl.querySelector('.back');
 const nextBtn = document.getElementById('nextBtn');
 
-const flashcards = [
-  { question: "¿Cuál es la capital de Francia?", answer: "París" },
-  { question: "¿Cuál es el símbolo del agua?", answer: "H₂O" },
-  { question: "¿Quién escribió 'Cien años de soledad'?", answer: "Gabriel García Márquez" },
-];
-
 let currentIndex = 0;
 
-// Función para mostrar la tarjeta actual
 function showFlashcard() {
-  frontEl.textContent = flashcards[currentIndex].question;
-  backEl.textContent = flashcards[currentIndex].answer;
+  frontEl.textContent = flashcardsData[currentIndex].question;
+  backEl.textContent = flashcardsData[currentIndex].answer;
   flashcardEl.classList.remove('flipped');
 }
 
-// Al hacer clic, se da la vuelta
-flashcardEl.addEventListener('click', () => {
-  flashcardEl.classList.toggle('flipped');
+// Voltear tarjeta al hacer click
+flashcardEl.addEventListener('click', (event) => {
+  if (event.ctrlKey) {
+    // Ctrl + click → siguiente tarjeta
+    nextFlashcard();
+  } else {
+    // Solo click → voltear
+    flashcardEl.classList.toggle('flipped');
+  }
 });
 
-// Siguiente tarjeta
-nextBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % flashcards.length;
+// Función para pasar a la siguiente tarjeta
+function nextFlashcard() {
+  currentIndex = (currentIndex + 1) % flashcardsData.length;
   showFlashcard();
-});
+}
 
-// Mostrar primera tarjeta
+// Botón “Siguiente”
+nextBtn.addEventListener('click', nextFlashcard);
+
+// Mostrar la primera tarjeta
 showFlashcard();
