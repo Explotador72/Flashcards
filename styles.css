@@ -4,7 +4,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #f0f0f0;
+  background: #202020;
 }
 
 .container {
@@ -34,15 +34,17 @@ body {
   padding: 20px;
   transition: transform 0.6s;
   backface-visibility: hidden; /* Evita que el texto se vea al revés */
-  background: white;
+  background: rgb(0, 0, 0);
 }
 
 .front {
   z-index: 2;
+  color: white;
 }
 
 .back {
   transform: rotateY(180deg);
+  color: white;
 }
 
 .flashcard.flipped .front {
