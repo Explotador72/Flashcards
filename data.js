@@ -60,7 +60,7 @@ const flashcardsData = [
     { question: "Relación polaridad y punto de ebullición", answer: "Más polar → mayor punto de ebullición (si masas similares)" },
 
     // Absorción y emisión
-    { question: "Diferencia entre fluorescencia y fosforescencia", answer: "Fluorescencia: emisión inmediata; Fosforescencia: emisión lenta tras estímulo" }
+    { question: "Diferencia entre fluorescencia y fosforescencia", answer: "Fluorescencia: emisión inmediata; Fosforescencia: emisión lenta tras estímulo" },
     { question: "Primer paso en notación de Lewis", answer: "Contar los electrones disponibles" },
     { question: "Cómo calcular el número de enlaces", answer: "NE = (electrones que quieren los átomos - electrones totales) / 2" },
     { question: "Qué hacer después de calcular los enlaces", answer: "Identificar los átomos del medio" },
