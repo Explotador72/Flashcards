@@ -1,12 +1,17 @@
 [
-    {
-        "question": "¿Cuál es el primer paso para dibujar la notación de Lewis?",
-        "answer": "Contar los electrones disponibles",
-        "category": "Química T6"
-    },
-    {
-        "question": "¿Cómo se calcula el número de enlaces en Lewis?",
-        "answer": "NE = (electrones que quieren los átomos - electrones totales) / 2",
-        "category": "Mates t6"
-    }
+  {
+    "question": "Qué es aromaticidad",
+    "answer": "Estabilidad excepcional de compuestos cíclicos y planos por conjugación de electrones",
+    "category": "Química T6"
+  },
+  {
+    "question": "Qué ocurre si los dipolos se cancelan",
+    "answer": "La molécula es apolar",
+    "category": "Química T6"
+  },
+  {
+    "question": "Qué condiciones necesita un puente de hidrógeno",
+    "answer": "H unido a átomo central y otro átomo con par de electrones libres",
+    "category": "Química T6"
+  }
 ]
