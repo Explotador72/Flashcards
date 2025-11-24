@@ -1,26 +1,29 @@
-name: Actualizar Flashcards
+name: Update data.json
 
 on:
+  workflow_dispatch: # Permite ejecución manual
   schedule:
-    - cron: '/5 * * * *'  # Cada día a las 6 AM
-  workflow_dispatch:    # Permite ejecutar manualmente desde GitHub UI
+    - cron: '*/5 * * * *' # Cada 5 minutos
 
 jobs:
-  update-json:
+  update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Instalar Python
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
-      - name: Instalar requests
-        run: pip install requests
-      - name: Ejecutar script
-        run: python generate_json.py
-      - name: Subir cambios
-        uses: EndBug/add-and-commit@v9
-        with:
-          author_name: "GitHub Actions"
-          author_email: "actions@github.com"
-          message: "Actualizar data.json desde Google Sheets"
+          python-version: "3.x"
+
+      - name: Run update script
+        run: python3 update_data.py
+
+      - name: Commit & Push changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add data.json
+          git commit -m "Update data.json"
+          git push
