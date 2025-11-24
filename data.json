@@ -1,0 +1,12 @@
+[
+    {
+        "question": "¿Cuál es el primer paso para dibujar la notación de Lewis?",
+        "answer": "Contar los electrones disponibles",
+        "category": "Química T6"
+    },
+    {
+        "question": "¿Cómo se calcula el número de enlaces en Lewis?",
+        "answer": "NE = (electrones que quieren los átomos - electrones totales) / 2",
+        "category": "Mates t6"
+    }
+]

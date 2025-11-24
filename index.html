@@ -7,15 +7,17 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
   <div class="container">
-    <div class="flashcard" id="flashcard">
+    <select id="categorySelect" aria-label="Seleccionar categoría" class="category-select"></select>
+    <div class="flashcard" id="flashcard" role="button" aria-pressed="false" tabindex="0">
+      <div class="flashcard-inner">
         <div class="front">Haz clic para ver la respuesta</div>
         <div class="back">Respuesta</div>
+      </div>
     </div>
-    <button id="nextBtn">Siguiente</button>
-</div>
-  <script src="data.js"></script>
+    <button id="nextBtn" class="button-next" type="button">Siguiente</button>
+  </div>
+
   <script src="flashcards.js"></script>
 </body>
 </html>

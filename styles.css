@@ -1,104 +1,249 @@
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #202020;
-  overflow: hidden;
+/* =======================================================
+   === VARIABLES CSS (CUSTOM PROPERTIES)
+   ======================================================= */
+:root{
+    /* Colores */
+    --color-background: #202020; /* Fondo más oscuro */
+    --color-flashcard-dark: #18181b; /* Base de la tarjeta */
+    --color-flashcard-light: #2c2c31; /* Fondo del select, hover */
+    --color-primary: #3b7f4a;
+    --color-primary-hover: #49a05c;
+    --color-text-light: #f7f7f8;
+    --color-text-muted: #aaaaae; /* Nuevo para texto secundario/ejemplo */
+    --color-border-subtle: rgba(255,255,255,0.08); /* Borde más visible */
+
+    /* Sombras y Radios */
+    --border-radius-card: 16px; /* Radio ligeramente mayor */
+    --box-shadow-card: 0 16px 40px rgba(0,0,0,0.65); /* Sombra más profunda */
+    --box-shadow-focus: 0 0 0 4px rgba(59,127,74,0.3); /* Sombra de enfoque más visible */
+    --container-gap: 30px; /* Separación entre elementos */
+    --max-width: 760px;
 }
 
+/* =======================================================
+   === RESETEO Y BASE
+   ======================================================= */
 html, body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  height: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* overflow: hidden; */ /* Lo he comentado por si necesitas scroll en el futuro */
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Mejor stack de fuentes */
+    background: var(--color-background);
+    color: var(--color-text-light);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit; /* Asegura que todos los elementos usen border-box */
 }
 
-
+/* Contenedor general - centra vertical y horizontal */
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--container-gap);
+    padding: 28px;
+    width: 100%; /* Asegura el ancho para el max-width en responsive */
+    max-width: var(--max-width); /* Limita el ancho del contenedor en sí, no de un inner */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.flashcard-inner {
-  width: 300px;
-  height: 200px;
-  transition: transform 0.6s ease;
-  transform-style: preserve-3d;
-  position: relative;
+
+
+/* =======================================================
+   === SELECT DE CATEGORÍAS
+   ======================================================= */
+.category-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 12px 18px; /* Padding ajustado */
+    font-size: 16px; /* Tamaño ligeramente mayor */
+    border-radius: 12px; /* Mayor radio */
+    background-color: var(--color-flashcard-light);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border-subtle);
+    cursor: pointer;
+    width: 250px; /* Ancho un poco mayor */
+    text-align: center;
+    transition: background-color .2s ease, box-shadow .2s ease, transform .1s ease;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+.category-select:hover{ 
+    background-color: #38383e; 
+    border-color: rgba(255,255,255,0.15);
+}
+.category-select:focus{
+    outline: none;
+    box-shadow: var(--box-shadow-focus); /* Utiliza la variable */
+    transform: translateY(-1px);
 }
 
-.flashcard.flipped .flashcard-inner {
-  transform: rotateY(180deg);
-}
 
-.front, .back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
 
-.back {
-  transform: rotateY(180deg);
-}
-
+/* =======================================================
+   === FLASHCARD (estructura 3D)
+   ======================================================= */
 .flashcard {
-  width: 300px;
-  height: 200px;
-  perspective: 1000px; /* Para el efecto 3D */
-  margin-bottom: 50px;
-  cursor: pointer;
+    width: 380px; /* Tarjeta ligeramente más ancha */
+    max-width: 90vw;
+    height: 250px; /* Tarjeta ligeramente más alta */
+    perspective: 1200px; /* Perspectiva ligeramente mayor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: box-shadow .2s ease; /* Transición para el foco */
+}
+.flashcard:hover {
+    /* Efecto sutil al pasar el ratón */
+    box-shadow: 0 0 0 3px rgba(59,127,74,0.1); 
+    border-radius: var(--border-radius-card); /* Necesario para que el hover se vea bien */
 }
 
-.flashcard > div {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  transition: transform 0.6s;
-  backface-visibility: hidden; /* Evita que el texto se vea al revés */
-  background: rgb(0, 0, 0);
+
+/* Elemento que gira */
+.flashcard-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(.25,.8,.25,1); /* Transición más suave */
+    will-change: transform;
 }
 
-.front {
-  z-index: 2;
-  color: white;
+/* Rotación cuando la tarjeta está volteada */
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
 }
 
+/* Estilos comunes a ambas caras */
+.front,
 .back {
-  transform: rotateY(180deg);
-  color: white;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    /* Se simplifica el gradient y se usa la variable de base */
+    background: var(--color-flashcard-dark); 
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--box-shadow-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px; /* Más padding para el texto */
+    text-align: center;
+    font-size: 1.15rem; /* Fuente más grande */
+    font-weight: 500;
+    color: var(--color-text-light);
+    backface-visibility: hidden;
+    border: 1px solid var(--color-border-subtle);
+    line-height: 1.4;
 }
 
-.flashcard.flipped .front {
-  transform: rotateY(180deg);
+/* Cara posterior mirando 'hacia atrás' */
+.back {
+    transform: rotateY(180deg);
+    font-size: 1.25rem; /* Texto de respuesta más destacado */
 }
 
-.flashcard.flipped .back {
-  transform: rotateY(0deg);
+/* Opcional: diferentes tonos para front/back (se ha mejorado la sutilidad) */
+.front { 
+    background: linear-gradient(145deg, #222226, var(--color-flashcard-dark));
+    color: var(--color-text-muted); /* Texto inicial un poco más apagado */
+}
+.back { 
+    background: linear-gradient(145deg, var(--color-flashcard-dark), #2a2a2d); 
+    color: var(--color-text-light);
+}
+
+/* El texto de la respuesta se puede enfocar */
+.back:not(:empty) {
+    color: var(--color-text-light); 
+    font-weight: 600;
 }
 
 
-button {
-  padding: 20px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: white;
-  transition: background-color 0.3s;
+/* Texto adaptable (ajusta tamaño en pantallas pequeñas) */
+/* Se ha simplificado esto ya que las reglas base y responsive ya lo manejan */
+.front p, .back p { margin: 0; }
+
+
+/* =======================================================
+   === BOTÓN SIGUIENTE
+   ======================================================= */
+.button-next {
+    padding: 14px 30px; /* Más padding */
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    transition: transform .15s cubic-bezier(.2,.6,.3,1), box-shadow .15s ease, background-color .18s ease;
+    letter-spacing: 0.5px; /* Pequeño espaciado para el texto */
+}
+.button-next:hover { 
+    background: var(--color-primary-hover); 
+    transform: translateY(-3px); 
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5); /* Sombra al pasar el ratón */
+}
+.button-next:active { 
+    transform: translateY(0); 
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+.button-next:focus { 
+    outline: none;
+    box-shadow: var(--box-shadow-focus); 
+    outline-offset: 4px; 
 }
 
-button:hover {
-  background-color: #45a049;
+/* =======================================================
+   === AJUSTES RESPONSIVE
+   ======================================================= */
+@media (max-width: 480px) {
+    .flashcard { 
+        width: 100%; /* Ocupa todo el ancho disponible */
+        max-width: calc(100vw - 40px); 
+        height: 220px; /* Altura ajustada */
+    }
+    .container {
+        padding: 20px; /* Menos padding en pantallas pequeñas */
+        gap: 24px;
+    }
+    .category-select { 
+        width: 100%; 
+        max-width: 350px; 
+        padding: 10px 14px;
+    }
+    .button-next { 
+        width: 100%; 
+        max-width: 350px; 
+    }
+    .front, .back { 
+        font-size: 1rem; 
+        padding: 20px; 
+    }
+    .back {
+        font-size: 1.1rem; /* Respuesta aún destacada */
+    }
+}
+
+/* =======================================================
+   === ACCESIBILIDAD Y DETALLES FINALES
+   ======================================================= */
+.flashcard:focus { 
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.06), var(--box-shadow-card); 
+    outline-offset: 0;
+    border-radius: var(--border-radius-card);
 }
