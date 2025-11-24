@@ -3,7 +3,7 @@ name: Update Data JSON
 on:
   workflow_dispatch: # Permite ejecución manual
   schedule:
-    - cron: '*/5 * * * *' # Cada 5 minutos
+    - cron: '0 */6 * * *'  # ✅ Cada 6 horas (menos agresivo)
 
 jobs:
   update:
@@ -23,13 +23,14 @@ jobs:
           pip install requests
 
       - name: Run update script
-        run: python3 update_data.py
+        run: python3 update_data.py  # ✅ Verifica que el script existe
 
       - name: Commit & Push changes
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}  # ✅ Token como variable de entorno
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add data.json
-          git commit -m "Update data.json" || echo "No changes to commit"
-          git push https://$PAT_TOKEN@github.com/Explotador72/Flashcards.git HEAD:main
-
+          git diff --staged --quiet || git commit -m "Update data.json"
+          git push https://${{ secrets.PAT_TOKEN }}@github.com/Explotador72/Flashcards.git HEAD:main
