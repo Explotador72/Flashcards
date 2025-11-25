@@ -8,17 +8,23 @@
 </head>
 <body>
   <div class="container">
+    <div class="sheets-container">
+      <div id="sheetTabs" class="sheet-tabs"></div>
+    </div>
+    
     <div class="category-container">
       <label for="categorySelect" class="category-label">Selecciona categorías (múltiple):</label>
       <select id="categorySelect" aria-label="Seleccionar categorías" class="category-select"></select>
       <small class="category-hint">Mantén Ctrl/Cmd para seleccionar múltiples categorías</small>
     </div>
+    
     <div class="flashcard" id="flashcard" role="button" aria-pressed="false" tabindex="0">
       <div class="flashcard-inner">
         <div class="front">Haz clic para ver la respuesta</div>
         <div class="back">Respuesta</div>
       </div>
     </div>
+    
     <button id="nextBtn" class="button-next" type="button">Siguiente</button>
   </div>
 

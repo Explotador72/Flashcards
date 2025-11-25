@@ -209,6 +209,58 @@ html, body {
     box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
+
+.sheets-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.sheet-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.sheet-tab {
+  padding: 10px 16px;
+  background: var(--color-flashcard-light);
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sheet-tab:hover {
+  background: #38383e;
+  transform: translateY(-1px);
+}
+
+.sheet-tab.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+@media (max-width: 480px) {
+  .sheet-tabs {
+    gap: 6px;
+  }
+  
+  .sheet-tab {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+
+
+
 @media (max-width: 480px) {
     .flashcard { 
         width: 100%;

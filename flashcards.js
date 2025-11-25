@@ -10,8 +10,20 @@ function initFlashcards(data) {
   const cleanData = data.filter(card => card.question && card.answer);
   flashcardsData = cleanData;
   originalData = cleanData;
+  
   initCategories();
+  shuffleFlashcards(); // Barajar al inicializar
   showFlashcard();
+}
+
+// ======================
+// BARAJAR FLASHCARDS (algoritmo Fisher-Yates)
+function shuffleFlashcards() {
+  for (let i = flashcardsData.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [flashcardsData[i], flashcardsData[j]] = [flashcardsData[j], flashcardsData[i]];
+  }
+  currentIndex = 0; // Reiniciar índice después de barajar
 }
 
 // ======================
@@ -109,11 +121,12 @@ function showFlashcard() {
 flashcardEl.addEventListener('click', () => flashcardEl.classList.toggle('flipped'));
 
 // ======================
-// SIGUIENTE TARJETA
+// SIGUIENTE TARJETA (ALEATORIA)
 nextBtn.addEventListener('click', nextFlashcard);
 function nextFlashcard() {
   if (!flashcardsData.length) return;
-  currentIndex = (currentIndex + 1) % flashcardsData.length;
+  // Seleccionar índice aleatorio en lugar de secuencial
+  currentIndex = Math.floor(Math.random() * flashcardsData.length);
   showFlashcard();
 }
 
@@ -186,7 +199,7 @@ function filterByCategories() {
       c.category && selectedCategories.has(c.category)
     );
   }
-  currentIndex = 0;
+  shuffleFlashcards(); // Barajar al cambiar categorías
   showFlashcard();
   
   // Actualizar texto del botón para mostrar cantidad
