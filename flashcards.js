@@ -14,28 +14,72 @@ function initFlashcards(data) {
 }
 
 // ======================
-// CARGA DESDE GOOGLE SHEETS (CSV)
+// PARSEADOR CSV robusto: soporta comillas, comas internas y celdas vacías
+function parseCSV(csvText) {
+  // Quitar BOM si existe
+  if (csvText.charCodeAt(0) === 0xFEFF) csvText = csvText.slice(1);
+
+  const lines = csvText.split(/\r?\n/).filter(line => line.trim() !== "");
+  if (!lines.length) return [];
+
+  // Parse headers usando la misma función de línea
+  const headers = parseCSVLine(lines[0]).map(h => h.trim());
+
+  const rows = lines.slice(1).map(line => {
+    const cols = parseCSVLine(line);
+    const obj = {};
+    headers.forEach((h, i) => {
+      obj[h] = (cols[i] || "").trim();
+    });
+    return obj;
+  });
+
+  return rows;
+}
+
+// parsea una línea CSV respetando comillas dobles y comas internas
+function parseCSVLine(line) {
+  const result = [];
+  let cur = "";
+  let insideQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+
+    if (ch === '"' ) {
+      // si es una comilla y la siguiente también es comilla -> escapada -> añadimos una comilla
+      if (insideQuotes && line[i+1] === '"') {
+        cur += '"';
+        i++; // saltar la comilla escapada
+      } else {
+        insideQuotes = !insideQuotes;
+      }
+    } else if (ch === ',' && !insideQuotes) {
+      result.push(cur);
+      cur = "";
+    } else {
+      cur += ch;
+    }
+  }
+  result.push(cur);
+  return result;
+}
+
+// ======================
+// CARGA DESDE GOOGLE SHEETS (CSV) con fallback a JSON local
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNGZwo-97c1vhJdxEzrS4-RBL5PJuoPu_KGw5gdaTYIO61YwgkB76YSeDmuOKFXr7o9y_41LLYMFAf/pub?gid=0&single=true&output=csv")
   .then(res => res.text())
   .then(csv => {
-    const lines = csv.split("\n").filter(line => line.trim() !== "");
-    const headers = lines[0].split(",").map(h => h.trim());
-    const flashcards = lines.slice(1).map(line => {
-      const data = line.split(",");
-      let obj = {};
-      headers.forEach((h, i) => obj[h] = (data[i] || "").trim()); // Evita error si falta columna
-      return obj;
-    });
-    initFlashcards(flashcards);
+    const parsed = parseCSV(csv);
+    initFlashcards(parsed);
   })
-  .catch(err => console.error("Error al cargar CSV:", err));
+  .catch(() => {
+    console.warn("Google Sheets no disponible. Usando JSON local…");
 
-// ======================
-// CARGA DESDE JSON LOCAL
-fetch('data.json')
-  .then(res => res.json())
-  .then(data => initFlashcards(data))
-  .catch(err => console.error("Error al cargar JSON:", err));
+    fetch("data.json")
+      .then(res => res.json())
+      .then(data => initFlashcards(data))
+      .catch(err => console.error("Error al cargar JSON de fallback:", err));
+  });
 
 // ======================
 // ELEMENTOS DEL DOM
@@ -71,7 +115,11 @@ function nextFlashcard() {
 // ======================
 // CATEGORÍAS AUTOMÁTICAS
 function initCategories() {
-  const categories = ["Todas", ...new Set(originalData.map(card => card.category))];
+  // filtrar categorías válidas (no undefined ni vacías)
+  const cats = originalData.map(card => card.category).filter(Boolean);
+  const categories = ["Todas", ...new Set(cats)];
+  // limpiar select si ya tiene opciones (por si initFlashcards se llama varias veces)
+  categorySelect.innerHTML = "";
   categories.forEach(cat => {
     const opt = document.createElement("option");
     opt.value = cat === "Todas" ? "all" : cat;
