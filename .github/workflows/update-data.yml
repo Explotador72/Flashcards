@@ -3,7 +3,7 @@ name: Update Data JSON
 on:
   workflow_dispatch: # Permite ejecución manual a través de la interfaz de GitHub
   schedule:
-    - cron: '0 */6 * * *' # Se ejecuta automáticamente cada 6 horas (a la hora 0, 6, 12, 18)
+    - cron: '*/5 * * * *' # Se ejecuta automáticamente cada 6 horas (a la hora 0, 6, 12, 18)
 
 # 🚀 Solución de Permisos: Otorga permiso de escritura al token automático
 # para que pueda hacer commit y push.
