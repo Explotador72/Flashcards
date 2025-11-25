@@ -526,7 +526,7 @@
   },
   {
     "question": "¿Cómo se calcula el Orden de Enlace (OE) según la TOM?",
-    "answer": "OE=2(e− enlazantes−e− antienlazantes)​",
+    "answer": "OE=(e− enlazantes−e− antienlazantes)​/2",
     "category": "Química T3"
   },
   {
