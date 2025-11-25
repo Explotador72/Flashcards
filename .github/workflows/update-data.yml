@@ -1,13 +1,19 @@
 name: Update Data JSON
 
 on:
-  workflow_dispatch: # Permite ejecución manual
+  workflow_dispatch: # Permite ejecución manual a través de la interfaz de GitHub
   schedule:
-    - cron: '0 */6 * * *'  # ✅ Cada 6 horas (menos agresivo)
+    - cron: '0 */6 * * *' # Se ejecuta automáticamente cada 6 horas (a la hora 0, 6, 12, 18)
+
+# 🚀 Solución de Permisos: Otorga permiso de escritura al token automático
+# para que pueda hacer commit y push.
+permissions:
+  contents: write 
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -20,18 +26,22 @@ jobs:
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
-          pip install requests
+          pip install requests # Si tu script update_data.py usa la librería requests
 
       - name: Run update script
-        run: python3 update_data.py  # ✅ Verifica que el script existe
+        run: python3 update_data.py # Ejecuta tu script para generar o actualizar data.json
 
       - name: Commit & Push changes
-        # NOTA: ELIMINA LA LÍNEA 'env:' Y EL SECRETO 'PAT_TOKEN' DE ESTE PASO
         run: |
+          # Configura la identidad del bot de GitHub Actions
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json
-          git diff --staged --quiet || git commit -m "Update data.json"
           
-          # Push simple. Usa el GITHUB_TOKEN implícito
+          # Agrega el archivo data.json al área de staging
+          git add data.json
+          
+          # Solo hace commit si hay diferencias/cambios en data.json
+          git diff --staged --quiet || git commit -m "⚙️ Actualización automatica de data.json"
+          
+          # Hace push. El token se maneja automáticamente gracias al permiso 'contents: write'
           git push
