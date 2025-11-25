@@ -26,11 +26,12 @@ jobs:
         run: python3 update_data.py  # ✅ Verifica que el script existe
 
       - name: Commit & Push changes
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}  # ✅ Token como variable de entorno
+        # NOTA: ELIMINA LA LÍNEA 'env:' Y EL SECRETO 'PAT_TOKEN' DE ESTE PASO
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data.json
           git diff --staged --quiet || git commit -m "Update data.json"
-          git push https://${{ secrets.PAT_TOKEN }}@github.com/Explotador72/Flashcards.git HEAD:main
+          
+          # Push simple. Usa el GITHUB_TOKEN implícito
+          git push
