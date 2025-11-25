@@ -1,22 +1,297 @@
 [
   {
+    "question": "Fuerzas más débiles que los enlaces químicos",
+    "answer": "Fuerzas de van der Waals",
+    "category": "Química T4"
+  },
+  {
+    "question": "Diferencia de electronegatividad para enlace iónico",
+    "answer": "Mayor de 1.7",
+    "category": "Química T4"
+  },
+  {
+    "question": "Diferencia de electronegatividad para enlace covalente",
+    "answer": "Menor de 1.7",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué ocurre en un enlace iónico",
+    "answer": "Transferencia de electrones entre un metal y un no metal",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué átomo cede electrones en enlace iónico",
+    "answer": "El átomo electropositivo (metal)",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué átomo gana electrones en enlace iónico",
+    "answer": "El átomo electronegativo (no metal)",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es la electrovalencia",
+    "answer": "Número de electrones intercambiados en un enlace iónico",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué indica el índice de coordinación",
+    "answer": "Número de iones de carga opuesta a igual distancia",
+    "category": "Química T4"
+  },
+  {
+    "question": "Propiedad mecánica de los sólidos iónicos",
+    "answer": "Frágiles pero duros",
+    "category": "Química T4"
+  },
+  {
+    "question": "Solubilidad típica de compuestos iónicos",
+    "answer": "Solubles en disolventes polares",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es un sólido iónico",
+    "answer": "Red cristalina formada por iones",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es el enlace metálico",
+    "answer": "Unión entre metales con mar de electrones deslocalizados",
+    "category": "Química T4"
+  },
+  {
+    "question": "Propiedad clave de los metales",
+    "answer": "Buena conductividad eléctrica",
+    "category": "Química T4"
+  },
+  {
+    "question": "Por qué los metales son maleables",
+    "answer": "Los cationes se deslizan sobre el mar de electrones",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es un enlace covalente",
+    "answer": "Compartición de electrones entre no metales",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es un enlace covalente apolar",
+    "answer": "Compartición equitativa de electrones",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es un enlace covalente polar",
+    "answer": "Compartición desigual → dipolo",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué determina la TRPEV",
+    "answer": "Geometría molecular basada en repulsiones de pares electrónicos",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es el número estérico",
+    "answer": "Átomos unidos + pares no enlazantes",
+    "category": "Química T4"
+  },
+  {
+    "question": "Geometría con 2 grupos electrónicos",
+    "answer": "Lineal (180°)",
+    "category": "Química T4"
+  },
+  {
+    "question": "Geometría con 3 grupos electrónicos",
+    "answer": "Trigonal planar (120°)",
+    "category": "Química T4"
+  },
+  {
+    "question": "Geometría con 4 grupos electrónicos",
+    "answer": "Tetraédrica (109.5°)",
+    "category": "Química T4"
+  },
+  {
+    "question": "Geometría 3 grupos + 1 par libre",
+    "answer": "Pirámide trigonal (107°)",
+    "category": "Química T4"
+  },
+  {
+    "question": "Geometría 2 grupos + 2 pares libres",
+    "answer": "Angular (104.5°)",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es la hibridación",
+    "answer": "Combinación matemática de orbitales atómicos",
+    "category": "Química T4"
+  },
+  {
+    "question": "Hibridación sp",
+    "answer": "Geometría lineal",
+    "category": "Química T4"
+  },
+  {
+    "question": "Hibridación sp²",
+    "answer": "Geometría trigonal planar",
+    "category": "Química T4"
+  },
+  {
+    "question": "Hibridación sp³",
+    "answer": "Geometría tetraédrica",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es un enlace sigma",
+    "answer": "Solapamiento frontal, densidad sobre el eje internuclear",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es un enlace pi",
+    "answer": "Solapamiento lateral, densidad fuera del eje",
+    "category": "Química T4"
+  },
+  {
+    "question": "Composición de un enlace doble",
+    "answer": "1 σ + 1 π",
+    "category": "Química T4"
+  },
+  {
+    "question": "Composición de un enlace triple",
+    "answer": "1 σ + 2 π",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué estudia la TOM",
+    "answer": "Formación de orbitales moleculares y su energía",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué indica el orden de enlace",
+    "answer": "Número de enlaces efectivos (enlazantes − antienlazantes)/2",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es el HOMO",
+    "answer": "Orbital molecular ocupado de mayor energía",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es el LUMO",
+    "answer": "Orbital molecular vacío de menor energía",
+    "category": "Química T4"
+  },
+  {
     "question": "Qué es aromaticidad",
-    "answer": "Estabilidad excepcional de compuestos cíclicos y planos por conjugación de electrones",
-    "category": "Química T6"
+    "answer": "Estabilidad de compuestos cíclicos, planos y conjugados",
+    "category": "Química T4"
   },
   {
-    "question": "Qué ocurre si los dipolos se cancelan",
-    "answer": "La molécula es apolar",
-    "category": "Química T6"
+    "question": "Condición de la regla de Hückel",
+    "answer": "4n+2 electrones π",
+    "category": "Química T4"
   },
   {
-    "question": "Qué condiciones necesita un puente de hidrógeno",
-    "answer": "H unido a átomo central y otro átomo con par de electrones libres",
-    "category": "Química T6"
+    "question": "Qué es absorbancia",
+    "answer": "Cantidad de luz absorbida por una disolución",
+    "category": "Química T4"
   },
   {
-    "question": "actualizado",
-    "answer": "Correcto",
-    "category": "Química T7"
+    "question": "Qué es fluorescencia",
+    "answer": "Emisión inmediata mientras dura el estímulo",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es fosforescencia",
+    "answer": "Emisión lenta tras retirar el estímulo",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué es momento dipolar",
+    "answer": "Medida de la separación de cargas en una molécula",
+    "category": "Química T4"
+  },
+  {
+    "question": "Cuándo no hay momento dipolar final",
+    "answer": "Cuando los dipolos se cancelan",
+    "category": "Química T4"
+  },
+  {
+    "question": "Interacción dipolo-dipolo",
+    "answer": "Potencial entre moléculas polares",
+    "category": "Química T4"
+  },
+  {
+    "question": "Interacción dipolo inducido",
+    "answer": "Interacción entre polar y apolar",
+    "category": "Química T4"
+  },
+  {
+    "question": "Interacción London",
+    "answer": "Interacción apolar-apolar por dipolos instantáneos",
+    "category": "Química T4"
+  },
+  {
+    "question": "Condiciones para puente de hidrógeno",
+    "answer": "H unido a F/O/N y par libre en otro átomo electronegativo",
+    "category": "Química T4"
+  },
+  {
+    "question": "Solubilidad: “lo semejante disuelve a lo semejante”",
+    "answer": "Polares en polares, apolares en apolares",
+    "category": "Química T4"
+  },
+  {
+    "question": "Qué afecta al punto de ebullición",
+    "answer": "Fuerza de atracción intermolecular y masa molar",
+    "category": "Química T4"
+  },
+  {
+    "question": "Gas ideal: ecuación",
+    "answer": "PV = nRT",
+    "category": "Química T5"
+  },
+  {
+    "question": "Qué es presión parcial",
+    "answer": "Presión que ejercerían los componentes por separado",
+    "category": "Química T5"
+  },
+  {
+    "question": "Primera ley de la termodinámica",
+    "answer": "ΔU = Q – W",
+    "category": "Química T5"
+  },
+  {
+    "question": "Segunda ley: entropía",
+    "answer": "ΔS ≥ 0 para sistemas aislados",
+    "category": "Química T5"
+  },
+  {
+    "question": "Criterio de espontaneidad (Gibbs)",
+    "answer": "ΔG < 0 espontánea",
+    "category": "Química T5"
+  },
+  {
+    "question": "Qué es energía de activación",
+    "answer": "Energía mínima para que ocurra una reacción",
+    "category": "Química T5"
+  },
+  {
+    "question": "Qué hace un catalizador",
+    "answer": "Disminuye Ea sin consumirse",
+    "category": "Química T5"
+  },
+  {
+    "question": "Qué indica Kc",
+    "answer": "Constante de equilibrio",
+    "category": "Química T5"
+  },
+  {
+    "question": "Principio de Le Châtelier",
+    "answer": "El sistema se desplaza para contrarrestar una perturbación",
+    "category": "Química T5"
+  },
+  {
+    "question": "Producto de solubilidad",
+    "answer": "Kps de un sólido poco soluble",
+    "category": "Química T5"
   }
 ]
