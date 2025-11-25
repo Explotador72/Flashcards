@@ -1,6 +1,7 @@
 let flashcardsData = [];
 let originalData = []; // Guardamos todas las flashcards
 let currentIndex = 0;
+let selectedCategories = new Set(); // Para almacenar categorías seleccionadas
 
 // ======================
 // FUNCION PARA INICIALIZAR LA WEB
@@ -92,7 +93,11 @@ const categorySelect = document.getElementById('categorySelect');
 // ======================
 // MOSTRAR TARJETA ACTUAL
 function showFlashcard() {
-  if (!flashcardsData.length) return;
+  if (!flashcardsData.length) {
+    frontEl.textContent = "No hay tarjetas en las categorías seleccionadas";
+    backEl.textContent = "";
+    return;
+  }
   const card = flashcardsData[currentIndex];
   frontEl.textContent = card.question;
   backEl.textContent = card.answer;
@@ -118,26 +123,85 @@ function initCategories() {
   // filtrar categorías válidas (no undefined ni vacías)
   const cats = originalData.map(card => card.category).filter(Boolean);
   const categories = ["Todas", ...new Set(cats)];
-  // limpiar select si ya tiene opciones (por si initFlashcards se llama varias veces)
+  
+  // limpiar select si ya tiene opciones
   categorySelect.innerHTML = "";
+  
+  // Hacer el select múltiple
+  categorySelect.setAttribute('multiple', 'true');
+  categorySelect.size = Math.min(6, categories.length); // Mostrar máximo 6 opciones a la vez
+  
   categories.forEach(cat => {
     const opt = document.createElement("option");
     opt.value = cat === "Todas" ? "all" : cat;
     opt.textContent = cat;
     categorySelect.appendChild(opt);
   });
-  categorySelect.addEventListener("change", filterByCategory);
+  
+  // Seleccionar "Todas" por defecto
+  selectedCategories.add("all");
+  categorySelect.querySelector('option[value="all"]').selected = true;
+  
+  categorySelect.addEventListener("change", handleCategorySelection);
 }
 
 // ======================
-// FILTRAR POR CATEGORÍA
-function filterByCategory() {
-  const cat = categorySelect.value;
-  if (cat === "all") {
+// MANEJAR SELECCIÓN MÚLTIPLE DE CATEGORÍAS
+function handleCategorySelection() {
+  const selectedOptions = Array.from(categorySelect.selectedOptions);
+  const selectedValues = selectedOptions.map(opt => opt.value);
+  
+  // Manejar lógica de selección
+  if (selectedValues.includes("all")) {
+    // Si se selecciona "Todas", deseleccionar todo lo demás
+    selectedCategories.clear();
+    selectedCategories.add("all");
+    Array.from(categorySelect.options).forEach(opt => {
+      opt.selected = opt.value === "all";
+    });
+  } else {
+    // Si se selecciona cualquier otra categoría, quitar "Todas"
+    selectedCategories.delete("all");
+    if (selectedValues.length === 0) {
+      // Si no hay nada seleccionado, seleccionar "Todas" por defecto
+      selectedCategories.add("all");
+      categorySelect.querySelector('option[value="all"]').selected = true;
+    } else {
+      // Agregar las categorías seleccionadas
+      selectedCategories.clear();
+      selectedValues.forEach(val => selectedCategories.add(val));
+    }
+  }
+  
+  filterByCategories();
+}
+
+// ======================
+// FILTRAR POR MÚLTIPLES CATEGORÍAS
+function filterByCategories() {
+  if (selectedCategories.has("all")) {
     flashcardsData = [...originalData];
   } else {
-    flashcardsData = originalData.filter(c => c.category === cat);
+    flashcardsData = originalData.filter(c => 
+      c.category && selectedCategories.has(c.category)
+    );
   }
   currentIndex = 0;
   showFlashcard();
+  
+  // Actualizar texto del botón para mostrar cantidad
+  updateNextButtonText();
+}
+
+// ======================
+// ACTUALIZAR TEXTO DEL BOTÓN SIGUIENTE
+function updateNextButtonText() {
+  const count = flashcardsData.length;
+  if (count === 0) {
+    nextBtn.textContent = "Siguiente (0)";
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.textContent = `Siguiente (${count})`;
+    nextBtn.disabled = false;
+  }
 }
