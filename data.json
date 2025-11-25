@@ -1,297 +1,467 @@
 [
   {
-    "question": "Fuerzas más débiles que los enlaces químicos",
-    "answer": "Fuerzas de van der Waals",
+    "question": "¿Qué es un átomo?",
+    "answer": "La unidad básica de la materia formada por protones, neutrones y electrones.",
     "category": "Química T4"
   },
   {
-    "question": "Diferencia de electronegatividad para enlace iónico",
-    "answer": "Mayor de 1.7",
+    "question": "¿Qué es un ion?",
+    "answer": "Átomo o molécula que ha perdido o ganado electrones.",
     "category": "Química T4"
   },
   {
-    "question": "Diferencia de electronegatividad para enlace covalente",
-    "answer": "Menor de 1.7",
+    "question": "¿Qué es un catión?",
+    "answer": "Ion con carga positiva.",
     "category": "Química T4"
   },
   {
-    "question": "Qué ocurre en un enlace iónico",
-    "answer": "Transferencia de electrones entre un metal y un no metal",
+    "question": "¿Qué es un anión?",
+    "answer": "Ion con carga negativa.",
     "category": "Química T4"
   },
   {
-    "question": "Qué átomo cede electrones en enlace iónico",
-    "answer": "El átomo electropositivo (metal)",
+    "question": "¿Qué es un isótopo?",
+    "answer": "Átomos del mismo elemento con distinto número de neutrones.",
     "category": "Química T4"
   },
   {
-    "question": "Qué átomo gana electrones en enlace iónico",
-    "answer": "El átomo electronegativo (no metal)",
+    "question": "¿Qué es la electronegatividad?",
+    "answer": "Tendencia de un átomo a atraer electrones en un enlace.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es la electrovalencia",
-    "answer": "Número de electrones intercambiados en un enlace iónico",
+    "question": "¿Qué escala mide la electronegatividad?",
+    "answer": "La escala de Pauling.",
     "category": "Química T4"
   },
   {
-    "question": "Qué indica el índice de coordinación",
-    "answer": "Número de iones de carga opuesta a igual distancia",
+    "question": "¿Qué es la energía de ionización?",
+    "answer": "Energía necesaria para arrancar un electrón de un átomo.",
     "category": "Química T4"
   },
   {
-    "question": "Propiedad mecánica de los sólidos iónicos",
-    "answer": "Frágiles pero duros",
+    "question": "¿Qué tendencia tiene la energía de ionización en la tabla periódica?",
+    "answer": "Aumenta arriba y a la derecha.",
     "category": "Química T4"
   },
   {
-    "question": "Solubilidad típica de compuestos iónicos",
-    "answer": "Solubles en disolventes polares",
+    "question": "¿Qué tendencia tiene el radio atómico?",
+    "answer": "Aumenta abajo y a la izquierda.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es un sólido iónico",
-    "answer": "Red cristalina formada por iones",
+    "question": "¿Qué es un enlace covalente?",
+    "answer": "Compartición de electrones entre átomos.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es el enlace metálico",
-    "answer": "Unión entre metales con mar de electrones deslocalizados",
+    "question": "¿Qué es un enlace iónico?",
+    "answer": "Transferencia de electrones entre un metal y un no metal.",
     "category": "Química T4"
   },
   {
-    "question": "Propiedad clave de los metales",
-    "answer": "Buena conductividad eléctrica",
+    "question": "¿Qué es un enlace metálico?",
+    "answer": "Nube de electrones deslocalizados entre átomos metálicos.",
     "category": "Química T4"
   },
   {
-    "question": "Por qué los metales son maleables",
-    "answer": "Los cationes se deslizan sobre el mar de electrones",
+    "question": "¿Qué es la hibridación sp?",
+    "answer": "Mezcla de un orbital s y un orbital p dando 2 orbitales híbridos lineales (180°).",
     "category": "Química T4"
   },
   {
-    "question": "Qué es un enlace covalente",
-    "answer": "Compartición de electrones entre no metales",
+    "question": "¿Qué geometría tiene un átomo con hibridación sp?",
+    "answer": "Geometría lineal (180°).",
     "category": "Química T4"
   },
   {
-    "question": "Qué es un enlace covalente apolar",
-    "answer": "Compartición equitativa de electrones",
+    "question": "¿Qué es la hibridación sp2?",
+    "answer": "Mezcla de un s y dos p generando 3 orbitales trigonal plana (120°).",
     "category": "Química T4"
   },
   {
-    "question": "Qué es un enlace covalente polar",
-    "answer": "Compartición desigual → dipolo",
+    "question": "¿Qué geometría tiene sp2?",
+    "answer": "Trigonal plana (120°).",
     "category": "Química T4"
   },
   {
-    "question": "Qué determina la TRPEV",
-    "answer": "Geometría molecular basada en repulsiones de pares electrónicos",
+    "question": "¿Qué es la hibridación sp3?",
+    "answer": "Mezcla de un s y tres p generando 4 orbitales tetraédricos (109,5°).",
     "category": "Química T4"
   },
   {
-    "question": "Qué es el número estérico",
-    "answer": "Átomos unidos + pares no enlazantes",
+    "question": "¿Qué geometría tiene sp3?",
+    "answer": "Tetraédrica (109,5°).",
     "category": "Química T4"
   },
   {
-    "question": "Geometría con 2 grupos electrónicos",
-    "answer": "Lineal (180°)",
+    "question": "¿Qué hibridación tiene el carbono en el etino (C₂H₂)?",
+    "answer": "sp.",
     "category": "Química T4"
   },
   {
-    "question": "Geometría con 3 grupos electrónicos",
-    "answer": "Trigonal planar (120°)",
+    "question": "¿Qué hibridación tiene el carbono en el eteno (C₂H₄)?",
+    "answer": "sp2.",
     "category": "Química T4"
   },
   {
-    "question": "Geometría con 4 grupos electrónicos",
-    "answer": "Tetraédrica (109.5°)",
+    "question": "¿Qué hibridación tiene el carbono en el metano (CH₄)?",
+    "answer": "sp3.",
     "category": "Química T4"
   },
   {
-    "question": "Geometría 3 grupos + 1 par libre",
-    "answer": "Pirámide trigonal (107°)",
+    "question": "¿Qué enlace es más fuerte: simple, doble o triple?",
+    "answer": "El triple.",
     "category": "Química T4"
   },
   {
-    "question": "Geometría 2 grupos + 2 pares libres",
-    "answer": "Angular (104.5°)",
+    "question": "¿Qué enlace es más largo: simple, doble o triple?",
+    "answer": "El simple.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es la hibridación",
-    "answer": "Combinación matemática de orbitales atómicos",
+    "question": "¿Qué es la VSEPR?",
+    "answer": "Teoría que predice geometrías moleculares según repulsión de pares electrónicos.",
     "category": "Química T4"
   },
   {
-    "question": "Hibridación sp",
-    "answer": "Geometría lineal",
+    "question": "¿Qué geometría tiene el agua según VSEPR?",
+    "answer": "Angular (104,5°).",
     "category": "Química T4"
   },
   {
-    "question": "Hibridación sp²",
-    "answer": "Geometría trigonal planar",
+    "question": "¿Qué tipo de enlace hay en H₂O?",
+    "answer": "Covalente polar.",
     "category": "Química T4"
   },
   {
-    "question": "Hibridación sp³",
-    "answer": "Geometría tetraédrica",
+    "question": "¿Qué tipo de enlace hay en NaCl?",
+    "answer": "Iónico.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es un enlace sigma",
-    "answer": "Solapamiento frontal, densidad sobre el eje internuclear",
+    "question": "¿Qué es una reacción endotérmica?",
+    "answer": "Reacción que absorbe energía.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es un enlace pi",
-    "answer": "Solapamiento lateral, densidad fuera del eje",
+    "question": "¿Qué es una reacción exotérmica?",
+    "answer": "Reacción que libera energía.",
     "category": "Química T4"
   },
   {
-    "question": "Composición de un enlace doble",
-    "answer": "1 σ + 1 π",
+    "question": "¿Qué es la entalpía (ΔH)?",
+    "answer": "Cambios de calor a presión constante.",
     "category": "Química T4"
   },
   {
-    "question": "Composición de un enlace triple",
-    "answer": "1 σ + 2 π",
+    "question": "¿Qué es la entropía (ΔS)?",
+    "answer": "Medida del desorden de un sistema.",
     "category": "Química T4"
   },
   {
-    "question": "Qué estudia la TOM",
-    "answer": "Formación de orbitales moleculares y su energía",
+    "question": "¿Qué indica un ΔG negativo?",
+    "answer": "Que la reacción es espontánea.",
     "category": "Química T4"
   },
   {
-    "question": "Qué indica el orden de enlace",
-    "answer": "Número de enlaces efectivos (enlazantes − antienlazantes)/2",
+    "question": "¿Qué indica un ΔG positivo?",
+    "answer": "Que la reacción no es espontánea.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es el HOMO",
-    "answer": "Orbital molecular ocupado de mayor energía",
+    "question": "¿Qué es un catalizador?",
+    "answer": "Sustancia que disminuye la energía de activación.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es el LUMO",
-    "answer": "Orbital molecular vacío de menor energía",
+    "question": "¿Qué son los reactivos?",
+    "answer": "Sustancias iniciales de una reacción.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es aromaticidad",
-    "answer": "Estabilidad de compuestos cíclicos, planos y conjugados",
+    "question": "¿Qué son los productos?",
+    "answer": "Sustancias resultantes de una reacción.",
     "category": "Química T4"
   },
   {
-    "question": "Condición de la regla de Hückel",
-    "answer": "4n+2 electrones π",
+    "question": "¿Qué es la molaridad (M)?",
+    "answer": "Moles de soluto por litro de disolución.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es absorbancia",
-    "answer": "Cantidad de luz absorbida por una disolución",
+    "question": "¿Qué es la masa molar?",
+    "answer": "Masa de un mol de sustancia.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es fluorescencia",
-    "answer": "Emisión inmediata mientras dura el estímulo",
+    "question": "¿Cuál es la masa molar del CO₂?",
+    "answer": "44 g/mol.",
     "category": "Química T4"
   },
   {
-    "question": "Qué es fosforescencia",
-    "answer": "Emisión lenta tras retirar el estímulo",
+    "question": "¿Cuántos átomos hay en 1 mol?",
+    "answer": "6,022×10²³ (número de Avogadro).",
     "category": "Química T4"
   },
   {
-    "question": "Qué es momento dipolar",
-    "answer": "Medida de la separación de cargas en una molécula",
+    "question": "¿Qué es un ácido según Brønsted-Lowry?",
+    "answer": "Donador de protones.",
     "category": "Química T4"
   },
   {
-    "question": "Cuándo no hay momento dipolar final",
-    "answer": "Cuando los dipolos se cancelan",
+    "question": "¿Qué es una base según Brønsted-Lowry?",
+    "answer": "Aceptor de protones.",
     "category": "Química T4"
   },
   {
-    "question": "Interacción dipolo-dipolo",
-    "answer": "Potencial entre moléculas polares",
+    "question": "¿Qué es el pH?",
+    "answer": "Medida de la acidez, pH = –log[H⁺].",
     "category": "Química T4"
   },
   {
-    "question": "Interacción dipolo inducido",
-    "answer": "Interacción entre polar y apolar",
+    "question": "¿Qué pH tiene un ácido fuerte?",
+    "answer": "Menor que 7.",
     "category": "Química T4"
   },
   {
-    "question": "Interacción London",
-    "answer": "Interacción apolar-apolar por dipolos instantáneos",
+    "question": "¿Qué pH tiene una base fuerte?",
+    "answer": "Mayor que 7.",
     "category": "Química T4"
   },
   {
-    "question": "Condiciones para puente de hidrógeno",
-    "answer": "H unido a F/O/N y par libre en otro átomo electronegativo",
+    "question": "¿Qué es una reacción redox?",
+    "answer": "Transferencia de electrones.",
     "category": "Química T4"
   },
   {
-    "question": "Solubilidad: “lo semejante disuelve a lo semejante”",
-    "answer": "Polares en polares, apolares en apolares",
+    "question": "¿Quién se reduce en una reacción redox?",
+    "answer": "La especie que gana electrones.",
     "category": "Química T4"
   },
   {
-    "question": "Qué afecta al punto de ebullición",
-    "answer": "Fuerza de atracción intermolecular y masa molar",
+    "question": "¿Quién se oxida en una reacción redox?",
+    "answer": "La especie que pierde electrones.",
     "category": "Química T4"
   },
   {
-    "question": "Gas ideal: ecuación",
-    "answer": "PV = nRT",
+    "question": "¿Qué es un agente oxidante?",
+    "answer": "El que se reduce.",
     "category": "Química T5"
   },
   {
-    "question": "Qué es presión parcial",
-    "answer": "Presión que ejercerían los componentes por separado",
+    "question": "¿Qué es un agente reductor?",
+    "answer": "El que se oxida.",
     "category": "Química T5"
   },
   {
-    "question": "Primera ley de la termodinámica",
-    "answer": "ΔU = Q – W",
+    "question": "¿Qué es una disolución saturada?",
+    "answer": "Contiene la máxima cantidad de soluto posible.",
     "category": "Química T5"
   },
   {
-    "question": "Segunda ley: entropía",
-    "answer": "ΔS ≥ 0 para sistemas aislados",
+    "question": "¿Qué es la presión parcial?",
+    "answer": "Presión ejercida por un gas en una mezcla.",
     "category": "Química T5"
   },
   {
-    "question": "Criterio de espontaneidad (Gibbs)",
-    "answer": "ΔG < 0 espontánea",
+    "question": "¿Qué establece la ley de Boyle?",
+    "answer": "P·V = constante (a temperatura constante).",
     "category": "Química T5"
   },
   {
-    "question": "Qué es energía de activación",
-    "answer": "Energía mínima para que ocurra una reacción",
+    "question": "¿Qué establece la ley de Charles?",
+    "answer": "V/T = constante (a presión constante).",
     "category": "Química T5"
   },
   {
-    "question": "Qué hace un catalizador",
-    "answer": "Disminuye Ea sin consumirse",
+    "question": "¿Qué establece la ley de Avogadro?",
+    "answer": "V ∝ n (a P y T constantes).",
     "category": "Química T5"
   },
   {
-    "question": "Qué indica Kc",
-    "answer": "Constante de equilibrio",
+    "question": "¿Qué es la constante de los gases R?",
+    "answer": "0,082 L·atm·mol⁻¹·K⁻¹.",
     "category": "Química T5"
   },
   {
-    "question": "Principio de Le Châtelier",
-    "answer": "El sistema se desplaza para contrarrestar una perturbación",
+    "question": "¿Qué fórmula tiene el gas ideal?",
+    "answer": "PV = nRT.",
     "category": "Química T5"
   },
   {
-    "question": "Producto de solubilidad",
-    "answer": "Kps de un sólido poco soluble",
+    "question": "¿Qué es un óxido ácido?",
+    "answer": "Óxido de no metal que reacciona con agua → ácido.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un óxido básico?",
+    "answer": "Óxido de metal que reacciona con agua → base.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un hidrácido?",
+    "answer": "Ácido formado por H + no metal (ej: HCl).",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un oxácido?",
+    "answer": "Ácido con H, O y un no metal (ej: HNO₃).",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es una sal?",
+    "answer": "Compuesto formado por un metal + un anión.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es la estequiometría?",
+    "answer": "Cálculo de proporciones en una reacción química.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es el reactivo limitante?",
+    "answer": "El que se consume primero en una reacción.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es el rendimiento porcentual?",
+    "answer": "(Rendimiento real / teórico) × 100.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es una reacción reversible?",
+    "answer": "Reacción que puede ir en ambos sentidos.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es el equilibrio químico?",
+    "answer": "Estado en el que las velocidades de reacción directa e inversa son iguales.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué dice Le Chatelier?",
+    "answer": "El sistema compensa cualquier cambio para restablecer el equilibrio.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un hidrocarburo?",
+    "answer": "Compuesto orgánico formado solo por C e H.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un alquano?",
+    "answer": "Hidrocarburo con enlaces simples C–C.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un alqueno?",
+    "answer": "Hidrocarburo con enlaces dobles C=C.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un alquino?",
+    "answer": "Hidrocarburo con enlaces triples C≡C.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Cómo es la geometría del alqueno?",
+    "answer": "Trigonal plana en el doble enlace.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Cómo es la geometría del alquino?",
+    "answer": "Lineal en el triple enlace.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un grupo funcional?",
+    "answer": "Parte de la molécula que determina su química.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué grupo funcional tiene un alcohol?",
+    "answer": "–OH.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué grupo funcional tiene un aldehído?",
+    "answer": "–CHO.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué grupo funcional tiene una cetona?",
+    "answer": "–CO–.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué grupo funcional tiene un ácido carboxílico?",
+    "answer": "–COOH.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué grupo funcional tiene un éster?",
+    "answer": "–COO–.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué grupo funcional tiene una amina?",
+    "answer": "–NH₂.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es la isomería?",
+    "answer": "Compuestos con misma fórmula pero distinta estructura.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un isómero estructural?",
+    "answer": "Misma fórmula, distinta conectividad.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un isómero geométrico (cis/trans)?",
+    "answer": "Diferente disposición espacial en dobles enlaces.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un polímero?",
+    "answer": "Cadena larga de monómeros repetidos.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es una reacción de neutralización?",
+    "answer": "Ácido + base → sal + agua.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es el punto de equivalencia?",
+    "answer": "Momento en que los moles de ácido y base son iguales.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es una disolución tampón?",
+    "answer": "Solución que resiste cambios de pH.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es la solubilidad?",
+    "answer": "Cantidad máxima de soluto que se disuelve en un solvente.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué afecta a la solubilidad?",
+    "answer": "Temperatura, presión y naturaleza del soluto/solvente.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un sólido iónico?",
+    "answer": "Red cristalina de iones con altos puntos de fusión.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es un sólido molecular?",
+    "answer": "Sustancias con enlaces débiles entre moléculas.",
     "category": "Química T5"
   }
 ]
