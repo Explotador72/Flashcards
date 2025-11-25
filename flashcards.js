@@ -15,23 +15,20 @@ function initFlashcards(data) {
 
 // ======================
 // CARGA DESDE GOOGLE SHEETS (CSV)
-function loadFromGoogleSheets() {
-    // 🛑 REEMPLAZA ESTA URL con el enlace directo CSV de tu Google Sheet
-    const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSNGZwo-97c1vhJdxEzrS4-RBL5PJuoPu_KGw5gdaTYIO61YwgkB76YSeDmuOKFXr7o9y_41LLYMFAf/pubhtml'; 
-    
-    fetch(GOOGLE_SHEET_CSV_URL)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
-            }
-            return response.text(); // Obtenemos el contenido como texto CSV
-        })
-        .then(csvText => {
-            const data = parseCSV(csvText); // Convertimos el texto CSV a un array de objetos
-            initFlashcards(data);
-        })
-        .catch(err => console.error("Error al cargar Google Sheet:", err));
-}
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNGZwo-97c1vhJdxEzrS4-RBL5PJuoPu_KGw5gdaTYIO61YwgkB76YSeDmuOKFXr7o9y_41LLYMFAf/pub?gid=0&single=true&output=csv")
+  .then(res => res.text())
+  .then(csv => {
+    const lines = csv.split("\n").filter(line => line.trim() !== "");
+    const headers = lines[0].split(",").map(h => h.trim());
+    const flashcards = lines.slice(1).map(line => {
+      const data = line.split(",");
+      let obj = {};
+      headers.forEach((h, i) => obj[h] = (data[i] || "").trim()); // Evita error si falta columna
+      return obj;
+    });
+    initFlashcards(flashcards);
+  })
+  .catch(err => console.error("Error al cargar CSV:", err));
 
 // ======================
 // CARGA DESDE JSON LOCAL
