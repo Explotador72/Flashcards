@@ -1,5 +1,10 @@
 [
   {
+    "question": "Actualización",
+    "answer": "Versión 1.0",
+    "category": "Actualización"
+  },
+  {
     "question": "¿Qué es un átomo?",
     "answer": "La unidad básica de la materia formada por protones, neutrones y electrones.",
     "category": "Química T4"
@@ -463,5 +468,175 @@
     "question": "¿Qué es un sólido molecular?",
     "answer": "Sustancias con enlaces débiles entre moléculas.",
     "category": "Química T5"
+  },
+  {
+    "question": "¿Cuál es la diferencia de electronegatividad (EN) que define un enlace iónico?",
+    "answer": "Mayor a 1.7 (>1.7)",
+    "category": "Química T1"
+  },
+  {
+    "question": "¿Cómo se llama el número de iones de carga opuesta que rodean a un ion en un sólido iónico?",
+    "answer": "Índice de coordinación",
+    "category": "Química T1"
+  },
+  {
+    "question": "¿Qué propiedad del enlace metálico explica que los metales sean maleables?",
+    "answer": "La movilidad del \"mar de electrones\" que permite el desplazamiento de las capas de iones.",
+    "category": "Química T1"
+  },
+  {
+    "question": "¿Cómo se calcula el Número Estérico (NE) según la Teoría TRPEV?",
+    "answer": "NE = Átomos unidos + Pares no enlazantes",
+    "category": "Química T2"
+  },
+  {
+    "question": "¿Cuál es el orden de repulsión de pares de electrones según la TRPEV?",
+    "answer": "Par no enlazante > Triple > Doble > Sencillo",
+    "category": "Química T2"
+  },
+  {
+    "question": "¿Qué geometría se asocia a un Número Estérico de 4 con dos pares no enlazantes?",
+    "answer": "Angular (104.5∘)",
+    "category": "Química T2"
+  },
+  {
+    "question": "¿Qué geometría y ángulo predice la hibridación sp2?",
+    "answer": "Trigonal planar (120∘)",
+    "category": "Química T2"
+  },
+  {
+    "question": "¿Cuál es la base de la Teoría de Enlace de Valencia (TEV)?",
+    "answer": "Solapamiento de orbitales atómicos y espines opuestos.",
+    "category": "Química T3"
+  },
+  {
+    "question": "¿Qué tipo de solapamiento de orbitales atómicos forma un enlace π (pi)?",
+    "answer": "Solapamiento lateral (densidad electrónica fuera del eje internuclear).",
+    "category": "Química T3"
+  },
+  {
+    "question": "¿Cuál es la multiplicidad de un enlace triple en términos de enlaces σ y π?",
+    "answer": "1σ+2π",
+    "category": "Química T3"
+  },
+  {
+    "question": "¿Qué postula la Teoría de Orbitales Moleculares (TOM) sobre la combinación de orbitales?",
+    "answer": "La combinación de N orbitales atómicos forma N orbitales moleculares.",
+    "category": "Química T3"
+  },
+  {
+    "question": "¿Cómo se calcula el Orden de Enlace (OE) según la TOM?",
+    "answer": "OE=2(e− enlazantes−e− antienlazantes)​",
+    "category": "Química T3"
+  },
+  {
+    "question": "Si el Orden de Enlace (OE) de una molécula es cero, ¿qué significa?",
+    "answer": "La molécula no existe como especie estable.",
+    "category": "Química T3"
+  },
+  {
+    "question": "¿Cuál es la expresión matemática de la Primera Ley de la Termodinámica?",
+    "answer": "ΔU=Q−W",
+    "category": "Química T4"
+  },
+  {
+    "question": "¿Qué mide la Entropía (ΔS)?",
+    "answer": "El grado de dispersión de la energía o el número de microestados (no solo el desorden).",
+    "category": "Química T4"
+  },
+  {
+    "question": "¿Qué dice la Ley de Hess sobre el cambio de entalpía (ΔH)?",
+    "answer": "El ΔH total solo depende de los estados inicial y final, no de los pasos intermedios.",
+    "category": "Química T4"
+  },
+  {
+    "question": "¿Cómo se define la Entalpía normal de formación (ΔHf∘​)?",
+    "answer": "Variación de la entalpía al formar un mol de compuesto a partir de sus constituyentes en el estado más estable y condiciones estándar.",
+    "category": "Química T4"
+  },
+  {
+    "question": "¿Qué valor de la Energía de Gibbs (ΔG) indica un proceso espontáneo?",
+    "answer": "ΔG<0 (exergónico)",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué postula la Teoría de Colisiones?",
+    "answer": "Las partículas deben chocar con orientación y velocidad (energía) adecuadas para reaccionar.",
+    "category": "Química T4"
+  },
+  {
+    "question": "¿Qué es la Energía de Activación (Ea​)?",
+    "answer": "La energía mínima necesaria que deben tener las partículas para producir la reacción.",
+    "category": "Química T4"
+  },
+  {
+    "question": "¿Qué es un catalizador y cómo afecta a la reacción?",
+    "answer": "Sustancia que aumenta la velocidad de la reacción (bajando la Ea​) sin consumirse, catalizando por igual la reacción directa e inversa.",
+    "category": "Química T4"
+  },
+  {
+    "question": "¿Qué es la Molecularidad de una etapa elemental?",
+    "answer": "El número de especies que participan en esa etapa elemental.",
+    "category": "Química T4"
+  },
+  {
+    "question": "¿Qué indica un valor de ΔG=0 en una reacción?",
+    "answer": "Que el sistema se encuentra en equilibrio dinámico.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es el Cociente de Reacción (Qc​)?",
+    "answer": "Ecuación que describe las concentraciones en cualquier momento, y que se convierte en la Constante de Equilibrio (Kc​) al alcanzar el equilibrio.",
+    "category": "Química T5"
+  },
+  {
+    "question": "Según el Principio de Le Châtelier, si se aumenta la presión en un equilibrio gaseoso, ¿hacia dónde se desplaza?",
+    "answer": "Hacia el lado con menos moles de gas.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Hacia dónde se desplaza un equilibrio si se aumenta la temperatura y la reacción es endotérmica?",
+    "answer": "Se desplaza hacia el sentido directo (productos) para consumir ese calor.",
+    "category": "Química T5"
+  },
+  {
+    "question": "Si en una reacción el control cinético domina al termodinámico, ¿qué proceso se realiza?",
+    "answer": "El más rápido (el que tiene la menor Energía de Activación), aunque no sea el más favorable termodinámicamente.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué efecto tiene un catalizador en la Constante de Equilibrio (Kc​)?",
+    "answer": "Ninguno. Solo afecta la velocidad a la que se alcanza el equilibrio.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué es la Solubilidad?",
+    "answer": "La cantidad máxima de soluto que se disuelve a una temperatura y cantidad de disolvente determinadas.",
+    "category": "Química T5"
+  },
+  {
+    "question": "¿Qué propiedad es necesaria en los átomos unidos al H para que se forme un Enlace de Hidrógeno?",
+    "answer": "Alta electronegatividad y poseer pares de electrones no enlazantes.",
+    "category": "Química T1"
+  },
+  {
+    "question": "¿Qué tipo de Fuerzas de van der Waals une moléculas apolares?",
+    "answer": "Dipolo instantáneo - Dipolo inducido (o Fuerzas de Dispersión de London).",
+    "category": "Química T1"
+  },
+  {
+    "question": "¿Por qué el H2​O es líquido a temperatura ambiente mientras que el H2​S es gas?",
+    "answer": "El Oxígeno es mucho más electronegativo que el Azufre, formando puentes de hidrógeno mucho más fuertes en el H2​O.",
+    "category": "Química T1"
+  },
+  {
+    "question": "¿Qué fenómeno describe que las moléculas poco polares tiendan a juntarse en agua, aumentando la entropía del sistema?",
+    "answer": "Efecto hidrofóbico.",
+    "category": "Química T1"
+  },
+  {
+    "question": "¿Qué es la Aromaticidad?",
+    "answer": "Es la propiedad de compuestos orgánicos cíclicos y planos que les confiere una estabilidad excepcional.",
+    "category": "Química T1"
   }
 ]
