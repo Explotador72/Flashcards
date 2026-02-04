@@ -1,4 +1,4 @@
-:root{
+﻿:root{
     --color-background: #202020;
     --color-flashcard-dark: #18181b;
     --color-flashcard-light: #2c2c31;
@@ -7,11 +7,13 @@
     --color-text-light: #f7f7f8;
     --color-text-muted: #aaaaae;
     --color-border-subtle: rgba(255,255,255,0.08);
+    --color-good: #2f7d4c;
+    --color-bad: #a34a4a;
     --border-radius-card: 16px;
     --box-shadow-card: 0 16px 40px rgba(0,0,0,0.65);
     --box-shadow-focus: 0 0 0 4px rgba(59,127,74,0.3);
     --container-gap: 30px;
-    --max-width: 760px;
+    --max-width: 1040px;
 }
 
 html, body {
@@ -30,13 +32,79 @@ html, body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     gap: var(--container-gap);
     padding: 28px;
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
+}
+
+.layout {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.sidebar {
+    width: 280px;
+    min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--container-gap);
+}
+
+.panel {
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 14px;
+    background: linear-gradient(160deg, rgba(36,36,42,0.9), rgba(24,24,28,0.9));
+    box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+    overflow: hidden;
+}
+
+.panel-title {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.panel-title::-webkit-details-marker {
+    display: none;
+}
+
+.panel-title::after {
+    content: "▾";
+    float: right;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+.panel[open] .panel-title::after {
+    transform: rotate(180deg);
+}
+
+.panel-body {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .category-container {
@@ -48,7 +116,7 @@ html, body {
 }
 
 .category-label {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--color-text-muted);
 }
@@ -61,15 +129,15 @@ html, body {
 
 .category-select {
     appearance: none;
-    padding: 12px 18px;
-    font-size: 16px;
+    padding: 12px 14px;
+    font-size: 15px;
     border-radius: 12px;
     background-color: var(--color-flashcard-light);
     color: var(--color-text-light);
     border: 1px solid var(--color-border-subtle);
     cursor: pointer;
-    width: 250px;
-    text-align: center;
+    width: 100%;
+    text-align: left;
     transition: background-color .2s ease, box-shadow .2s ease;
     box-shadow: 0 6px 16px rgba(0,0,0,0.4);
 }
@@ -108,7 +176,125 @@ html, body {
     color: var(--color-text-light);
 }
 
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
+.menu-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.menu-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 180px;
+    width: 100%;
+}
+
+.menu-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.menu-select {
+    appearance: none;
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 10px;
+    background-color: #2b2b31;
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border-subtle);
+    cursor: pointer;
+    transition: background-color .2s ease, box-shadow .2s ease;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    width: 100%;
+}
+
+.menu-select:hover {
+    background-color: #38383e;
+}
+
+.menu-select:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-focus);
+}
+
+.menu-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-light);
+    background: rgba(255,255,255,0.04);
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-subtle);
+    width: 100%;
+}
+
+.menu-check input {
+    accent-color: var(--color-primary);
+}
+
+.stats {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    text-align: left;
+    letter-spacing: 0.02em;
+}
+
+.button-secondary,
+.button-ghost {
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-subtle);
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s, background-color .2s;
+}
+
+.button-secondary {
+    background: #2b2b31;
+    color: var(--color-text-light);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+
+.button-secondary.good {
+    background: rgba(47,125,76,0.25);
+    border-color: rgba(47,125,76,0.6);
+}
+
+.button-secondary.bad {
+    background: rgba(163,74,74,0.25);
+    border-color: rgba(163,74,74,0.6);
+}
+
+.button-secondary:hover {
+    transform: translateY(-2px);
+}
+
+.button-ghost {
+    background: transparent;
+    color: var(--color-text-muted);
+    border-style: dashed;
+}
+
+.button-ghost:hover {
+    color: var(--color-text-light);
+    border-color: rgba(255,255,255,0.2);
+}
 
 .flashcard {
     width: 380px;
@@ -209,7 +395,6 @@ html, body {
     box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
-
 .sheets-container {
   width: 100%;
   display: flex;
@@ -247,6 +432,22 @@ html, body {
   border-color: var(--color-primary);
 }
 
+@media (max-width: 900px) {
+    .layout {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .main {
+        align-items: center;
+    }
+}
+
 @media (max-width: 480px) {
   .sheet-tabs {
     gap: 6px;
@@ -257,9 +458,6 @@ html, body {
     font-size: 13px;
   }
 }
-
-
-
 
 @media (max-width: 480px) {
     .flashcard { 
@@ -279,8 +477,27 @@ html, body {
         max-width: 350px;
         padding: 10px 14px;
     }
+
+    .menu {
+        padding: 0;
+    }
+
+    .menu-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .menu-block {
+        min-width: 100%;
+    }
+
+    .menu-check {
+        justify-content: center;
+    }
     
-    .button-next { 
+    .button-next,
+    .button-secondary,
+    .button-ghost { 
         width: 100%;
         max-width: 350px;
     }

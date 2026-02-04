@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -8,24 +8,70 @@
 </head>
 <body>
   <div class="container">
-    <div class="sheets-container">
-      <div id="sheetTabs" class="sheet-tabs"></div>
+    <div class="layout">
+      <aside class="sidebar">
+        <details class="panel" open>
+          <summary class="panel-title">Categorias</summary>
+          <div class="panel-body">
+            <label for="categorySelect" class="category-label">Selecciona categorias (multiple):</label>
+            <select id="categorySelect" aria-label="Seleccionar categorias" class="category-select"></select>
+            <small class="category-hint">Manten Ctrl/Cmd para seleccionar multiples categorias</small>
+          </div>
+        </details>
+
+        <details class="panel" open>
+          <summary class="panel-title">Opciones</summary>
+          <div class="panel-body">
+            <div class="menu">
+              <div class="menu-row">
+                <div class="menu-block">
+                  <label class="menu-label" for="modeSelect">Modo</label>
+                  <select id="modeSelect" class="menu-select">
+                    <option value="smart">Aleatorio inteligente</option>
+                    <option value="random">Aleatorio clasico</option>
+                  </select>
+                </div>
+                <div class="menu-block">
+                  <label class="menu-label" for="randomnessSelect">Aleatoriedad</label>
+                  <select id="randomnessSelect" class="menu-select">
+                    <option value="soft">Suave</option>
+                    <option value="normal">Normal</option>
+                    <option value="chaos">Caos</option>
+                  </select>
+                </div>
+                <label class="menu-check">
+                  <input type="checkbox" id="avoidRepeat" checked>
+                  Evitar repeticion reciente
+                </label>
+              </div>
+              <div class="menu-row">
+                <button id="markCorrect" class="button-secondary good" type="button">Bien</button>
+                <button id="markWrong" class="button-secondary bad" type="button">Mal</button>
+                <button id="resetProgress" class="button-ghost" type="button">Reiniciar progreso</button>
+              </div>
+              <div class="stats">
+                <span id="statsText">Tarjetas: 0</span>
+              </div>
+            </div>
+          </div>
+        </details>
+      </aside>
+
+      <main class="main">
+        <div class="sheets-container">
+          <div id="sheetTabs" class="sheet-tabs"></div>
+        </div>
+
+        <div class="flashcard" id="flashcard" role="button" aria-pressed="false" tabindex="0">
+          <div class="flashcard-inner">
+            <div class="front">Haz clic para ver la respuesta</div>
+            <div class="back">Respuesta</div>
+          </div>
+        </div>
+        
+        <button id="nextBtn" class="button-next" type="button">Siguiente</button>
+      </main>
     </div>
-    
-    <div class="category-container">
-      <label for="categorySelect" class="category-label">Selecciona categorías (múltiple):</label>
-      <select id="categorySelect" aria-label="Seleccionar categorías" class="category-select"></select>
-      <small class="category-hint">Mantén Ctrl/Cmd para seleccionar múltiples categorías</small>
-    </div>
-    
-    <div class="flashcard" id="flashcard" role="button" aria-pressed="false" tabindex="0">
-      <div class="flashcard-inner">
-        <div class="front">Haz clic para ver la respuesta</div>
-        <div class="back">Respuesta</div>
-      </div>
-    </div>
-    
-    <button id="nextBtn" class="button-next" type="button">Siguiente</button>
   </div>
 
   <script src="flashcards.js"></script>
