@@ -1,0 +1,2719 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 3005 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(DOCUMENTACION COMPLETA DEL PROYECTO FLASHCARDS) Tj
+0 -12 Td
+(Generado: 2026-02-04 12:15) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(INDICE 1. Vision general 2. Estructura de archivos 3. Diccionario de nombres \(componentes,) Tj
+0 -12 Td
+(elementos y variables\) 4. index.html \(estructura y UI\) 5. styles.css \(tema visual y layout\) 6.) Tj
+0 -12 Td
+(flashcards.js \(logica completa y detallada\) 7. Codigo fuente completo \(referencia\)) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(1. Vision general) Tj
+0 -12 Td
+(Este proyecto es una app web estatica de flashcards. Carga preguntas desde Google Sheets en) Tj
+0 -12 Td
+(CSV, y si no esta disponible usa data.json. Permite filtrar por categorias, barajar tarjetas, y) Tj
+0 -12 Td
+(registrar progreso local con un modo inteligente de aleatoriedad.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(2. Estructura de archivos) Tj
+0 -12 Td
+(- index.html) Tj
+0 -12 Td
+(- styles.css) Tj
+0 -12 Td
+(- flashcards.js) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(3. Diccionario de nombres \(componentes, elementos y variables\)) Tj
+0 -12 Td
+(3.1 HTML / UI) Tj
+0 -12 Td
+(- container: contenedor principal que centra y limita el ancho de la app.) Tj
+0 -12 Td
+(- layout: grid principal con sidebar a la izquierda y main a la derecha.) Tj
+0 -12 Td
+(- sidebar: columna lateral que contiene categorias y opciones.) Tj
+0 -12 Td
+(- panel: bloque desplegable para categorias y opciones.) Tj
+0 -12 Td
+(- panel-title: titulo clickable del panel desplegable.) Tj
+0 -12 Td
+(- panel-body: contenido interno del panel.) Tj
+0 -12 Td
+(- sheetTabs: contenedor de tabs si hay multiples hojas.) Tj
+0 -12 Td
+(- flashcard: tarjeta interactiva \(canvas visual de la flashcard\).) Tj
+0 -12 Td
+(- front/back: caras frontal y trasera de la tarjeta.) Tj
+0 -12 Td
+(- nextBtn: boton para siguiente tarjeta.) Tj
+0 -12 Td
+(- categorySelect: selector multiple de categorias.) Tj
+0 -12 Td
+(- modeSelect: selector de modo \(inteligente / clasico\).) Tj
+0 -12 Td
+(- randomnessSelect: selector de nivel de aleatoriedad.) Tj
+0 -12 Td
+(- avoidRepeat: checkbox para evitar repeticion reciente.) Tj
+0 -12 Td
+(- markCorrect / markWrong: botones para registrar acierto o fallo.) Tj
+0 -12 Td
+(- resetProgress: boton para reiniciar progreso.) Tj
+0 -12 Td
+(- statsText: texto con resumen de estadisticas.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(3.2 JavaScript \(datos y estado\)) Tj
+0 -12 Td
+(- flashcardsData: lista activa de tarjetas tras filtrar categorias.) Tj
+0 -12 Td
+(- originalData: lista completa de tarjetas cargadas.) Tj
+0 -12 Td
+(- currentIndex: indice actual dentro de flashcardsData.) Tj
+0 -12 Td
+(- selectedCategories: conjunto de categorias seleccionadas.) Tj
+0 -12 Td
+(- recentIds: cola de ids recientes para evitar repeticion.) Tj
+0 -12 Td
+(- progress: objeto con estadisticas por tarjeta \(correct, wrong, seen\).) Tj
+0 -12 Td
+(- settings: opciones persistentes \(mode, randomness, avoidRepeat\).) Tj
+0 -12 Td
+(- STORAGE_PROGRESS_KEY / STORAGE_SETTINGS_KEY: claves de localStorage.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(3.3 JavaScript \(funciones\)) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 2 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 3227 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(- initFlashcards: inicializa datos, ids, UI y estados.) Tj
+0 -12 Td
+(- shuffleFlashcards: baraja tarjetas con Fisher-Yates.) Tj
+0 -12 Td
+(- parseCSV / parseCSVLine: parsean CSV a objetos.) Tj
+0 -12 Td
+(- showFlashcard: renderiza la tarjeta actual y actualiza stats.) Tj
+0 -12 Td
+(- toggleFlip: voltea la tarjeta.) Tj
+0 -12 Td
+(- nextFlashcard: calcula la siguiente tarjeta y la muestra.) Tj
+0 -12 Td
+(- initCategories / handleCategorySelection / filterByCategories: gestion de categorias.) Tj
+0 -12 Td
+(- updateNextButtonText: actualiza contador del boton siguiente.) Tj
+0 -12 Td
+(- markAnswer: registra un acierto o fallo y avanza.) Tj
+0 -12 Td
+(- pickNextIndex: selecciona el siguiente indice con peso y aleatoriedad.) Tj
+0 -12 Td
+(- calcWeight: calcula el peso de cada tarjeta segun fallos/aciertos.) Tj
+0 -12 Td
+(- getRandomnessJitter: ajusta variacion segun modo.) Tj
+0 -12 Td
+(- getRecentWindow / rememberRecent: evita repeticion reciente.) Tj
+0 -12 Td
+(- updateStatsUI: resume estadisticas del set actual.) Tj
+0 -12 Td
+(- registerSeen: incrementa visualizaciones.) Tj
+0 -12 Td
+(- createCardId: genera un id hash estable para cada tarjeta.) Tj
+0 -12 Td
+(- load/saveProgress / load/saveSettings: persistencia en localStorage.) Tj
+0 -12 Td
+(- applySettingsToUI: aplica settings al UI.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(4. index.html \(estructura y UI\)) Tj
+0 -12 Td
+(- Contiene el layout principal con sidebar \(categorias y opciones\) y el contenido central con) Tj
+0 -12 Td
+(la flashcard.) Tj
+0 -12 Td
+(- Usa <details> para secciones desplegables de categorias y opciones.) Tj
+0 -12 Td
+(- Incluye controles de modo, aleatoriedad, evitar repeticion, botones Bien/Mal y estadisticas.) Tj
+0 -12 Td
+(- Define el contenedor de flashcard con front y back para el flip 3D.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(5. styles.css \(tema visual y layout\)) Tj
+0 -12 Td
+(- Define variables CSS para colores, sombras, radios y medidas.) Tj
+0 -12 Td
+(- Layout con .layout: sidebar izquierda y main a la derecha.) Tj
+0 -12 Td
+(- Paneles desplegables con estilos para <details>/<summary>.) Tj
+0 -12 Td
+(- Estilos de select, botones, cards, y animacion de flip 3D.) Tj
+0 -12 Td
+(- Media queries para responsivo \(<900px y <480px\).) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(6. flashcards.js \(logica completa y detallada\)) Tj
+0 -12 Td
+(6.1 Variables y estado inicial) Tj
+0 -12 Td
+(- Se declaran estructuras globales para datos \(flashcardsData, originalData\), estado) Tj
+0 -12 Td
+(\(currentIndex, selectedCategories, recentIds\) y persistencia \(progress, settings\).) Tj
+0 -12 Td
+(- progress y settings se cargan desde localStorage al iniciar.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(6.2 Carga de datos) Tj
+0 -12 Td
+(- Se intenta obtener un CSV de Google Sheets mediante fetch.) Tj
+0 -12 Td
+(- parseCSV convierte el CSV en objetos {question, answer, category,...}.) Tj
+0 -12 Td
+(- Si falla, se carga data.json local.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(6.3 Inicializacion de tarjetas) Tj
+0 -12 Td
+(- initFlashcards filtra filas vacias y genera un id estable por tarjeta.) Tj
+0 -12 Td
+(- Si no existe progreso previo para una tarjeta, se inicializa con 0.) Tj
+0 -12 Td
+(- Se inicializa UI de categorias, se baraja y se aplica el estado inicial a la UI.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+6 0 obj
+<< /Length 2502 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+() Tj
+0 -12 Td
+(6.4 Render y eventos) Tj
+0 -12 Td
+(- showFlashcard renderiza la tarjeta actual y registra que fue vista.) Tj
+0 -12 Td
+(- toggleFlip aplica el flip 3D en la tarjeta \(click o teclado\).) Tj
+0 -12 Td
+(- nextFlashcard usa pickNextIndex para elegir la siguiente tarjeta.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(6.5 Gestion de categorias) Tj
+0 -12 Td
+(- initCategories crea el select multiple y agrega la opcion Todas.) Tj
+0 -12 Td
+(- handleCategorySelection asegura la logica de 'Todas' vs multiples.) Tj
+0 -12 Td
+(- filterByCategories aplica el filtro y actualiza el contador del boton.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(6.6 Progreso y controles) Tj
+0 -12 Td
+(- markAnswer actualiza stats \(correct/wrong\) y avanza.) Tj
+0 -12 Td
+(- resetProgress limpia el progreso y recalcula stats visibles.) Tj
+0 -12 Td
+(- Las opciones del menu guardan settings en localStorage.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(6.7 Aleatoriedad inteligente) Tj
+0 -12 Td
+(- pickNextIndex construye una lista de candidatos y calcula un peso por tarjeta.) Tj
+0 -12 Td
+(- Si avoidRepeat esta activo, excluye ids recientes en recentIds.) Tj
+0 -12 Td
+(- calcWeight aumenta el peso cuando hay mas fallos que aciertos.) Tj
+0 -12 Td
+(- getRandomnessJitter aplica un factor aleatorio segun nivel.) Tj
+0 -12 Td
+(- getRecentWindow define cuantos ids recordar para evitar repeticiones.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(6.8 Estadisticas) Tj
+0 -12 Td
+(- updateStatsUI calcula totales del set filtrado y el score actual.) Tj
+0 -12 Td
+(- registerSeen incrementa las visualizaciones por tarjeta.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(6.9 Persistencia) Tj
+0 -12 Td
+(- createCardId crea un hash con question/answer/category para id estable.) Tj
+0 -12 Td
+(- load/saveProgress y load/saveSettings manejan localStorage.) Tj
+0 -12 Td
+(- applySettingsToUI sincroniza la UI con la configuracion guardada.) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(7. Codigo fuente completo \(referencia\)) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(--- index.html ---) Tj
+0 -12 Td
+(<!DOCTYPE html>) Tj
+0 -12 Td
+(<html lang="es">) Tj
+0 -12 Td
+(<head>) Tj
+0 -12 Td
+(  <meta charset="UTF-8">) Tj
+0 -12 Td
+(  <meta name="viewport" content="width=device-width, initial-scale=1.0">) Tj
+0 -12 Td
+(  <title>Flashcards</title>) Tj
+0 -12 Td
+(  <link rel="stylesheet" href="styles.css">) Tj
+0 -12 Td
+(</head>) Tj
+0 -12 Td
+(<body>) Tj
+0 -12 Td
+(  <div class="container">) Tj
+0 -12 Td
+(    <div class="layout">) Tj
+0 -12 Td
+(      <aside class="sidebar">) Tj
+0 -12 Td
+(        <details class="panel" open>) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 6 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+8 0 obj
+<< /Length 2837 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(          <summary class="panel-title">Categorias</summary>) Tj
+0 -12 Td
+(          <div class="panel-body">) Tj
+0 -12 Td
+(            <label for="categorySelect" class="category-label">Selecciona categorias) Tj
+0 -12 Td
+(\(multiple\):</label>) Tj
+0 -12 Td
+(            <select id="categorySelect" aria-label="Seleccionar categorias" class="category-) Tj
+0 -12 Td
+(select"></select>) Tj
+0 -12 Td
+(            <small class="category-hint">Manten Ctrl/Cmd para seleccionar multiples) Tj
+0 -12 Td
+(categorias</small>) Tj
+0 -12 Td
+(          </div>) Tj
+0 -12 Td
+(        </details>) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(        <details class="panel" open>) Tj
+0 -12 Td
+(          <summary class="panel-title">Opciones</summary>) Tj
+0 -12 Td
+(          <div class="panel-body">) Tj
+0 -12 Td
+(            <div class="menu">) Tj
+0 -12 Td
+(              <div class="menu-row">) Tj
+0 -12 Td
+(                <div class="menu-block">) Tj
+0 -12 Td
+(                  <label class="menu-label" for="modeSelect">Modo</label>) Tj
+0 -12 Td
+(                  <select id="modeSelect" class="menu-select">) Tj
+0 -12 Td
+(                    <option value="smart">Aleatorio inteligente</option>) Tj
+0 -12 Td
+(                    <option value="random">Aleatorio clasico</option>) Tj
+0 -12 Td
+(                  </select>) Tj
+0 -12 Td
+(                </div>) Tj
+0 -12 Td
+(                <div class="menu-block">) Tj
+0 -12 Td
+(                  <label class="menu-label" for="randomnessSelect">Aleatoriedad</label>) Tj
+0 -12 Td
+(                  <select id="randomnessSelect" class="menu-select">) Tj
+0 -12 Td
+(                    <option value="soft">Suave</option>) Tj
+0 -12 Td
+(                    <option value="normal">Normal</option>) Tj
+0 -12 Td
+(                    <option value="chaos">Caos</option>) Tj
+0 -12 Td
+(                  </select>) Tj
+0 -12 Td
+(                </div>) Tj
+0 -12 Td
+(                <label class="menu-check">) Tj
+0 -12 Td
+(                  <input type="checkbox" id="avoidRepeat" checked>) Tj
+0 -12 Td
+(                  Evitar repeticion reciente) Tj
+0 -12 Td
+(                </label>) Tj
+0 -12 Td
+(              </div>) Tj
+0 -12 Td
+(              <div class="menu-row">) Tj
+0 -12 Td
+(                <button id="markCorrect" class="button-secondary good") Tj
+0 -12 Td
+(type="button">Bien</button>) Tj
+0 -12 Td
+(                <button id="markWrong" class="button-secondary bad" type="button">Mal</button>) Tj
+0 -12 Td
+(                <button id="resetProgress" class="button-ghost" type="button">Reiniciar) Tj
+0 -12 Td
+(progreso</button>) Tj
+0 -12 Td
+(              </div>) Tj
+0 -12 Td
+(              <div class="stats">) Tj
+0 -12 Td
+(                <span id="statsText">Tarjetas: 0</span>) Tj
+0 -12 Td
+(              </div>) Tj
+0 -12 Td
+(            </div>) Tj
+0 -12 Td
+(          </div>) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 8 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+10 0 obj
+<< /Length 2013 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(        </details>) Tj
+0 -12 Td
+(      </aside>) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(      <main class="main">) Tj
+0 -12 Td
+(        <div class="sheets-container">) Tj
+0 -12 Td
+(          <div id="sheetTabs" class="sheet-tabs"></div>) Tj
+0 -12 Td
+(        </div>) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(        <div class="flashcard" id="flashcard" role="button" aria-pressed="false" tabindex="0">) Tj
+0 -12 Td
+(          <div class="flashcard-inner">) Tj
+0 -12 Td
+(            <div class="front">Haz clic para ver la respuesta</div>) Tj
+0 -12 Td
+(            <div class="back">Respuesta</div>) Tj
+0 -12 Td
+(          </div>) Tj
+0 -12 Td
+(        </div>) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(        <button id="nextBtn" class="button-next" type="button">Siguiente</button>) Tj
+0 -12 Td
+(      </main>) Tj
+0 -12 Td
+(    </div>) Tj
+0 -12 Td
+(  </div>) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  <script src="flashcards.js"></script>) Tj
+0 -12 Td
+(</body>) Tj
+0 -12 Td
+(</html>) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(--- styles.css ---) Tj
+0 -12 Td
+(:root{) Tj
+0 -12 Td
+(    --color-background: #202020;) Tj
+0 -12 Td
+(    --color-flashcard-dark: #18181b;) Tj
+0 -12 Td
+(    --color-flashcard-light: #2c2c31;) Tj
+0 -12 Td
+(    --color-primary: #3b7f4a;) Tj
+0 -12 Td
+(    --color-primary-hover: #49a05c;) Tj
+0 -12 Td
+(    --color-text-light: #f7f7f8;) Tj
+0 -12 Td
+(    --color-text-muted: #aaaaae;) Tj
+0 -12 Td
+(    --color-border-subtle: rgba\(255,255,255,0.08\);) Tj
+0 -12 Td
+(    --color-good: #2f7d4c;) Tj
+0 -12 Td
+(    --color-bad: #a34a4a;) Tj
+0 -12 Td
+(    --border-radius-card: 16px;) Tj
+0 -12 Td
+(    --box-shadow-card: 0 16px 40px rgba\(0,0,0,0.65\);) Tj
+0 -12 Td
+(    --box-shadow-focus: 0 0 0 4px rgba\(59,127,74,0.3\);) Tj
+0 -12 Td
+(    --container-gap: 30px;) Tj
+0 -12 Td
+(    --max-width: 1040px;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(html, body {) Tj
+0 -12 Td
+(    margin: 0;) Tj
+0 -12 Td
+(    padding: 0;) Tj
+0 -12 Td
+(    height: 100%;) Tj
+0 -12 Td
+(    font-family: "Inter", system-ui, -apple-system, sans-serif;) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 10 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+12 0 obj
+<< /Length 1727 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(    background: var\(--color-background\);) Tj
+0 -12 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(    -webkit-font-smoothing: antialiased;) Tj
+0 -12 Td
+(    box-sizing: border-box;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+(*, *::before, *::after { box-sizing: inherit; }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.container {) Tj
+0 -12 Td
+(    min-height: 100vh;) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    flex-direction: column;) Tj
+0 -12 Td
+(    align-items: stretch;) Tj
+0 -12 Td
+(    justify-content: flex-start;) Tj
+0 -12 Td
+(    gap: var\(--container-gap\);) Tj
+0 -12 Td
+(    padding: 16px 28px 28px;) Tj
+0 -12 Td
+(    width: 100%;) Tj
+0 -12 Td
+(    max-width: var\(--max-width\);) Tj
+0 -12 Td
+(    margin: 0 auto;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.layout {) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    gap: 24px;) Tj
+0 -12 Td
+(    width: 100%;) Tj
+0 -12 Td
+(    align-items: flex-start;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.sidebar {) Tj
+0 -12 Td
+(    width: 280px;) Tj
+0 -12 Td
+(    min-width: 240px;) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    flex-direction: column;) Tj
+0 -12 Td
+(    gap: 16px;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.main {) Tj
+0 -12 Td
+(    flex: 1;) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    flex-direction: column;) Tj
+0 -12 Td
+(    align-items: center;) Tj
+0 -12 Td
+(    gap: var\(--container-gap\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.panel {) Tj
+0 -12 Td
+(    border: 1px solid var\(--color-border-subtle\);) Tj
+0 -12 Td
+(    border-radius: 14px;) Tj
+0 -12 Td
+(    background: linear-gradient\(160deg, rgba\(36,36,42,0.9\), rgba\(24,24,28,0.9\)\);) Tj
+0 -12 Td
+(    box-shadow: 0 12px 28px rgba\(0,0,0,0.45\);) Tj
+ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 12 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+14 0 obj
+<< /Length 1569 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(    overflow: hidden;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.panel-title {) Tj
+0 -12 Td
+(    list-style: none;) Tj
+0 -12 Td
+(    cursor: pointer;) Tj
+0 -12 Td
+(    padding: 14px 16px;) Tj
+0 -12 Td
+(    font-weight: 600;) Tj
+0 -12 Td
+(    font-size: 14px;) Tj
+0 -12 Td
+(    letter-spacing: 0.06em;) Tj
+0 -12 Td
+(    text-transform: uppercase;) Tj
+0 -12 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(    background: rgba\(255,255,255,0.03\);) Tj
+0 -12 Td
+(    border-bottom: 1px solid var\(--color-border-subtle\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.panel-title::-webkit-details-marker {) Tj
+0 -12 Td
+(    display: none;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.panel-title::after {) Tj
+0 -12 Td
+(    content: "?";) Tj
+0 -12 Td
+(    float: right;) Tj
+0 -12 Td
+(    opacity: 0.7;) Tj
+0 -12 Td
+(    transition: transform 0.2s ease;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.panel[open] .panel-title::after {) Tj
+0 -12 Td
+(    transform: rotate\(180deg\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.panel-body {) Tj
+0 -12 Td
+(    padding: 14px 16px 16px;) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    flex-direction: column;) Tj
+0 -12 Td
+(    gap: 10px;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.category-container {) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    flex-direction: column;) Tj
+0 -12 Td
+(    align-items: center;) Tj
+0 -12 Td
+(    gap: 8px;) Tj
+0 -12 Td
+(    text-align: center;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.category-label {) Tj
+0 -12 Td
+(    font-size: 13px;) Tj
+ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 14 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+16 0 obj
+<< /Length 1764 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(    font-weight: 500;) Tj
+0 -12 Td
+(    color: var\(--color-text-muted\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.category-hint {) Tj
+0 -12 Td
+(    font-size: 12px;) Tj
+0 -12 Td
+(    color: var\(--color-text-muted\);) Tj
+0 -12 Td
+(    opacity: 0.7;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.category-select {) Tj
+0 -12 Td
+(    appearance: none;) Tj
+0 -12 Td
+(    padding: 12px 14px;) Tj
+0 -12 Td
+(    font-size: 15px;) Tj
+0 -12 Td
+(    border-radius: 12px;) Tj
+0 -12 Td
+(    background-color: var\(--color-flashcard-light\);) Tj
+0 -12 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(    border: 1px solid var\(--color-border-subtle\);) Tj
+0 -12 Td
+(    cursor: pointer;) Tj
+0 -12 Td
+(    width: 100%;) Tj
+0 -12 Td
+(    text-align: left;) Tj
+0 -12 Td
+(    transition: background-color .2s ease, box-shadow .2s ease;) Tj
+0 -12 Td
+(    box-shadow: 0 6px 16px rgba\(0,0,0,0.4\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.category-select:hover{) Tj
+0 -12 Td
+(    background-color: #38383e;) Tj
+0 -12 Td
+(    border-color: rgba\(255,255,255,0.15\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.category-select:focus{) Tj
+0 -12 Td
+(    outline: none;) Tj
+0 -12 Td
+(    box-shadow: var\(--box-shadow-focus\);) Tj
+0 -12 Td
+(    overflow: auto;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.category-select[multiple] {) Tj
+0 -12 Td
+(    height: 200px;) Tj
+0 -12 Td
+(    min-height: 120px;) Tj
+0 -12 Td
+(    text-align: left;) Tj
+0 -12 Td
+(    padding: 8px;) Tj
+0 -12 Td
+(    scrollbar-width: none; /* Firefox */) Tj
+0 -12 Td
+(    -ms-overflow-style: none; /* IE/Edge */) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.category-select[multiple] option {) Tj
+0 -12 Td
+(    padding: 8px 12px;) Tj
+0 -12 Td
+(    margin: 2px 0;) Tj
+ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 16 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+18 0 obj
+<< /Length 1582 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(    border-radius: 6px;) Tj
+0 -12 Td
+(    cursor: pointer;) Tj
+0 -12 Td
+(    transition: background-color 0.2s ease;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.category-select[multiple] option:hover,) Tj
+0 -12 Td
+(.category-select[multiple] option:checked {) Tj
+0 -12 Td
+(    background-color: var\(--color-primary\);) Tj
+0 -12 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.menu {) Tj
+0 -12 Td
+(    width: 100%;) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    flex-direction: column;) Tj
+0 -12 Td
+(    gap: 12px;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.menu-row {) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    flex-wrap: wrap;) Tj
+0 -12 Td
+(    gap: 12px;) Tj
+0 -12 Td
+(    align-items: center;) Tj
+0 -12 Td
+(    justify-content: flex-start;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.menu-block {) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    flex-direction: column;) Tj
+0 -12 Td
+(    gap: 6px;) Tj
+0 -12 Td
+(    min-width: 180px;) Tj
+0 -12 Td
+(    width: 100%;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.menu-label {) Tj
+0 -12 Td
+(    font-size: 12px;) Tj
+0 -12 Td
+(    font-weight: 600;) Tj
+0 -12 Td
+(    color: var\(--color-text-muted\);) Tj
+0 -12 Td
+(    text-transform: uppercase;) Tj
+0 -12 Td
+(    letter-spacing: 0.08em;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.menu-select {) Tj
+0 -12 Td
+(    appearance: none;) Tj
+0 -12 Td
+(    padding: 10px 14px;) Tj
+0 -12 Td
+(    font-size: 14px;) Tj
+0 -12 Td
+(    border-radius: 10px;) Tj
+0 -12 Td
+(    background-color: #2b2b31;) Tj
+ET
+endstream
+endobj
+19 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 18 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+20 0 obj
+<< /Length 1729 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(    border: 1px solid var\(--color-border-subtle\);) Tj
+0 -12 Td
+(    cursor: pointer;) Tj
+0 -12 Td
+(    transition: background-color .2s ease, box-shadow .2s ease;) Tj
+0 -12 Td
+(    box-shadow: 0 6px 16px rgba\(0,0,0,0.3\);) Tj
+0 -12 Td
+(    width: 100%;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.menu-select:hover {) Tj
+0 -12 Td
+(    background-color: #38383e;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.menu-select:focus {) Tj
+0 -12 Td
+(    outline: none;) Tj
+0 -12 Td
+(    box-shadow: var\(--box-shadow-focus\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.menu-check {) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    align-items: center;) Tj
+0 -12 Td
+(    gap: 8px;) Tj
+0 -12 Td
+(    font-size: 13px;) Tj
+0 -12 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(    background: rgba\(255,255,255,0.04\);) Tj
+0 -12 Td
+(    padding: 10px 12px;) Tj
+0 -12 Td
+(    border-radius: 10px;) Tj
+0 -12 Td
+(    border: 1px solid var\(--color-border-subtle\);) Tj
+0 -12 Td
+(    width: 100%;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.menu-check input {) Tj
+0 -12 Td
+(    accent-color: var\(--color-primary\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.stats {) Tj
+0 -12 Td
+(    font-size: 12px;) Tj
+0 -12 Td
+(    color: var\(--color-text-muted\);) Tj
+0 -12 Td
+(    text-align: left;) Tj
+0 -12 Td
+(    letter-spacing: 0.02em;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-secondary,) Tj
+0 -12 Td
+(.button-ghost {) Tj
+0 -12 Td
+(    padding: 12px 18px;) Tj
+0 -12 Td
+(    font-size: 14px;) Tj
+0 -12 Td
+(    font-weight: 600;) Tj
+0 -12 Td
+(    border-radius: 10px;) Tj
+0 -12 Td
+(    border: 1px solid var\(--color-border-subtle\);) Tj
+ET
+endstream
+endobj
+21 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 20 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+22 0 obj
+<< /Length 1673 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(    cursor: pointer;) Tj
+0 -12 Td
+(    transition: transform .15s, box-shadow .15s, background-color .2s;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-secondary {) Tj
+0 -12 Td
+(    background: #2b2b31;) Tj
+0 -12 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(    box-shadow: 0 8px 18px rgba\(0,0,0,0.35\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-secondary.good {) Tj
+0 -12 Td
+(    background: rgba\(47,125,76,0.25\);) Tj
+0 -12 Td
+(    border-color: rgba\(47,125,76,0.6\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-secondary.bad {) Tj
+0 -12 Td
+(    background: rgba\(163,74,74,0.25\);) Tj
+0 -12 Td
+(    border-color: rgba\(163,74,74,0.6\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-secondary:hover {) Tj
+0 -12 Td
+(    transform: translateY\(-2px\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-ghost {) Tj
+0 -12 Td
+(    background: transparent;) Tj
+0 -12 Td
+(    color: var\(--color-text-muted\);) Tj
+0 -12 Td
+(    border-style: dashed;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-ghost:hover {) Tj
+0 -12 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(    border-color: rgba\(255,255,255,0.2\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.flashcard {) Tj
+0 -12 Td
+(    width: 380px;) Tj
+0 -12 Td
+(    max-width: 90vw;) Tj
+0 -12 Td
+(    height: 250px;) Tj
+0 -12 Td
+(    perspective: 1200px;) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    align-items: center;) Tj
+0 -12 Td
+(    justify-content: center;) Tj
+0 -12 Td
+(    cursor: pointer;) Tj
+0 -12 Td
+(    -webkit-tap-highlight-color: transparent;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.flashcard-inner {) Tj
+ET
+endstream
+endobj
+23 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 22 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+24 0 obj
+<< /Length 1873 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(    width: 100%;) Tj
+0 -12 Td
+(    height: 100%;) Tj
+0 -12 Td
+(    position: relative;) Tj
+0 -12 Td
+(    transform-style: preserve-3d;) Tj
+0 -12 Td
+(    transition: transform 0.7s cubic-bezier\(.25,.8,.25,1\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.flashcard.flipped .flashcard-inner { transform: rotateY\(180deg\); }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.front, .back {) Tj
+0 -12 Td
+(    position: absolute;) Tj
+0 -12 Td
+(    inset: 0;) Tj
+0 -12 Td
+(    width: 100%;) Tj
+0 -12 Td
+(    height: 100%;) Tj
+0 -12 Td
+(    background: var\(--color-flashcard-dark\);) Tj
+0 -12 Td
+(    border-radius: var\(--border-radius-card\);) Tj
+0 -12 Td
+(    box-shadow: var\(--box-shadow-card\);) Tj
+0 -12 Td
+(    display: flex;) Tj
+0 -12 Td
+(    align-items: center;) Tj
+0 -12 Td
+(    justify-content: center;) Tj
+0 -12 Td
+(    padding: 30px;) Tj
+0 -12 Td
+(    text-align: center;) Tj
+0 -12 Td
+(    font-weight: 500;) Tj
+0 -12 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(    backface-visibility: hidden;) Tj
+0 -12 Td
+(    border: 1px solid var\(--color-border-subtle\);) Tj
+0 -12 Td
+(    line-height: 1.4;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.back { transform: rotateY\(180deg\); }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.front {) Tj
+0 -12 Td
+(    background: linear-gradient\(145deg, #222226, var\(--color-flashcard-dark\)\);) Tj
+0 -12 Td
+(    color: var\(--color-text-muted\);) Tj
+0 -12 Td
+(    font-size: 1.15rem;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.back {) Tj
+0 -12 Td
+(    background: linear-gradient\(145deg, var\(--color-flashcard-dark\), #2a2a2d\);) Tj
+0 -12 Td
+(    font-size: 1.25rem;) Tj
+0 -12 Td
+(    font-weight: 600;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-next {) Tj
+0 -12 Td
+(    padding: 14px 30px;) Tj
+0 -12 Td
+(    font-size: 16px;) Tj
+0 -12 Td
+(    font-weight: 600;) Tj
+0 -12 Td
+(    border-radius: 12px;) Tj
+ET
+endstream
+endobj
+25 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 24 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+26 0 obj
+<< /Length 1718 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(    background: var\(--color-primary\);) Tj
+0 -12 Td
+(    color: var\(--color-text-light\);) Tj
+0 -12 Td
+(    border: none;) Tj
+0 -12 Td
+(    cursor: pointer;) Tj
+0 -12 Td
+(    box-shadow: 0 10px 25px rgba\(0,0,0,0.4\);) Tj
+0 -12 Td
+(    transition: transform .15s, box-shadow .15s, background-color .18s;) Tj
+0 -12 Td
+(    letter-spacing: 0.5px;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-next:hover {) Tj
+0 -12 Td
+(    background: var\(--color-primary-hover\);) Tj
+0 -12 Td
+(    transform: translateY\(-3px\);) Tj
+0 -12 Td
+(    box-shadow: 0 12px 30px rgba\(0,0,0,0.5\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-next:active {) Tj
+0 -12 Td
+(    transform: translateY\(0\);) Tj
+0 -12 Td
+(    box-shadow: 0 6px 15px rgba\(0,0,0,0.4\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-next:focus {) Tj
+0 -12 Td
+(    outline: none;) Tj
+0 -12 Td
+(    box-shadow: var\(--box-shadow-focus\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-next:disabled {) Tj
+0 -12 Td
+(    background-color: #666;) Tj
+0 -12 Td
+(    cursor: not-allowed;) Tj
+0 -12 Td
+(    transform: none;) Tj
+0 -12 Td
+(    box-shadow: 0 6px 15px rgba\(0,0,0,0.3\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.button-next:disabled:hover {) Tj
+0 -12 Td
+(    background-color: #666;) Tj
+0 -12 Td
+(    transform: none;) Tj
+0 -12 Td
+(    box-shadow: 0 6px 15px rgba\(0,0,0,0.3\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.sheets-container {) Tj
+0 -12 Td
+(  width: 100%;) Tj
+0 -12 Td
+(  display: flex;) Tj
+0 -12 Td
+(  justify-content: center;) Tj
+0 -12 Td
+(  margin-bottom: 10px;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.sheet-tabs {) Tj
+0 -12 Td
+(  display: flex;) Tj
+0 -12 Td
+(  gap: 8px;) Tj
+ET
+endstream
+endobj
+27 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 26 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+28 0 obj
+<< /Length 1507 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(  flex-wrap: wrap;) Tj
+0 -12 Td
+(  justify-content: center;) Tj
+0 -12 Td
+(  max-width: 100%;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.sheet-tab {) Tj
+0 -12 Td
+(  padding: 10px 16px;) Tj
+0 -12 Td
+(  background: var\(--color-flashcard-light\);) Tj
+0 -12 Td
+(  color: var\(--color-text-light\);) Tj
+0 -12 Td
+(  border: 1px solid var\(--color-border-subtle\);) Tj
+0 -12 Td
+(  border-radius: 8px;) Tj
+0 -12 Td
+(  cursor: pointer;) Tj
+0 -12 Td
+(  transition: all 0.2s ease;) Tj
+0 -12 Td
+(  font-size: 14px;) Tj
+0 -12 Td
+(  font-weight: 500;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.sheet-tab:hover {) Tj
+0 -12 Td
+(  background: #38383e;) Tj
+0 -12 Td
+(  transform: translateY\(-1px\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(.sheet-tab.active {) Tj
+0 -12 Td
+(  background: var\(--color-primary\);) Tj
+0 -12 Td
+(  border-color: var\(--color-primary\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(@media \(max-width: 900px\) {) Tj
+0 -12 Td
+(    .layout {) Tj
+0 -12 Td
+(        flex-direction: column;) Tj
+0 -12 Td
+(        align-items: stretch;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .sidebar {) Tj
+0 -12 Td
+(        width: 100%;) Tj
+0 -12 Td
+(        min-width: 0;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .main {) Tj
+0 -12 Td
+(        align-items: center;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(@media \(max-width: 480px\) {) Tj
+0 -12 Td
+(  .sheet-tabs {) Tj
+0 -12 Td
+(    gap: 6px;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+() Tj
+ET
+endstream
+endobj
+29 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 28 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+30 0 obj
+<< /Length 1442 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(  .sheet-tab {) Tj
+0 -12 Td
+(    padding: 8px 12px;) Tj
+0 -12 Td
+(    font-size: 13px;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(@media \(max-width: 480px\) {) Tj
+0 -12 Td
+(    .flashcard {) Tj
+0 -12 Td
+(        width: 100%;) Tj
+0 -12 Td
+(        max-width: calc\(100vw - 40px\);) Tj
+0 -12 Td
+(        height: 220px;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .container {) Tj
+0 -12 Td
+(        padding: 20px;) Tj
+0 -12 Td
+(        gap: 24px;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .category-select,) Tj
+0 -12 Td
+(    .category-select[multiple] {) Tj
+0 -12 Td
+(        width: 100%;) Tj
+0 -12 Td
+(        max-width: 350px;) Tj
+0 -12 Td
+(        padding: 10px 14px;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .menu {) Tj
+0 -12 Td
+(        padding: 0;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .menu-row {) Tj
+0 -12 Td
+(        flex-direction: column;) Tj
+0 -12 Td
+(        align-items: stretch;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .menu-block {) Tj
+0 -12 Td
+(        min-width: 100%;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .menu-check {) Tj
+0 -12 Td
+(        justify-content: center;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .button-next,) Tj
+0 -12 Td
+(    .button-secondary,) Tj
+0 -12 Td
+(    .button-ghost {) Tj
+0 -12 Td
+(        width: 100%;) Tj
+0 -12 Td
+(        max-width: 350px;) Tj
+0 -12 Td
+(    }) Tj
+ET
+endstream
+endobj
+31 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 30 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+32 0 obj
+<< /Length 1911 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+() Tj
+0 -12 Td
+(    .front, .back {) Tj
+0 -12 Td
+(        font-size: 1rem;) Tj
+0 -12 Td
+(        padding: 20px;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .back { font-size: 1.1rem; }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    .category-label { font-size: 13px; }) Tj
+0 -12 Td
+(    .category-hint { font-size: 11px; }) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(--- flashcards.js ---) Tj
+0 -12 Td
+(let flashcardsData = [];) Tj
+0 -12 Td
+(let originalData = []; // Guardamos todas las flashcards) Tj
+0 -12 Td
+(let currentIndex = 0;) Tj
+0 -12 Td
+(let selectedCategories = new Set\(\); // Para almacenar categorias seleccionadas) Tj
+0 -12 Td
+(let recentIds = [];) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(const STORAGE_PROGRESS_KEY = "flashcards_progress_v1";) Tj
+0 -12 Td
+(const STORAGE_SETTINGS_KEY = "flashcards_settings_v1";) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(let progress = loadProgress\(\);) Tj
+0 -12 Td
+(let settings = loadSettings\(\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// FUNCION PARA INICIALIZAR LA WEB) Tj
+0 -12 Td
+(function initFlashcards\(data\) {) Tj
+0 -12 Td
+(  // Filtramos filas vacias o mal formadas) Tj
+0 -12 Td
+(  const cleanData = data.filter\(card => card.question && card.answer\);) Tj
+0 -12 Td
+(  cleanData.forEach\(card => {) Tj
+0 -12 Td
+(    card._id = createCardId\(card\);) Tj
+0 -12 Td
+(    if \(!progress[card._id]\) {) Tj
+0 -12 Td
+(      progress[card._id] = { correct: 0, wrong: 0, seen: 0 };) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+(  }\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  flashcardsData = cleanData;) Tj
+0 -12 Td
+(  originalData = cleanData;) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  initCategories\(\);) Tj
+0 -12 Td
+(  shuffleFlashcards\(\); // Barajar al inicializar) Tj
+0 -12 Td
+(  applySettingsToUI\(\);) Tj
+0 -12 Td
+(  updateNextButtonText\(\);) Tj
+0 -12 Td
+(  showFlashcard\(\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+ET
+endstream
+endobj
+33 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 32 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+34 0 obj
+<< /Length 2225 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(// BARAJAR FLASHCARDS \(algoritmo Fisher-Yates\)) Tj
+0 -12 Td
+(function shuffleFlashcards\(\) {) Tj
+0 -12 Td
+(  for \(let i = flashcardsData.length - 1; i > 0; i--\) {) Tj
+0 -12 Td
+(    const j = Math.floor\(Math.random\(\) * \(i + 1\)\);) Tj
+0 -12 Td
+(    [flashcardsData[i], flashcardsData[j]] = [flashcardsData[j], flashcardsData[i]];) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(  currentIndex = 0; // Reiniciar indice despues de barajar) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// PARSEADOR CSV robusto: soporta comillas, comas internas y celdas vacias) Tj
+0 -12 Td
+(function parseCSV\(csvText\) {) Tj
+0 -12 Td
+(  // Quitar BOM si existe) Tj
+0 -12 Td
+(  if \(csvText.charCodeAt\(0\) === 0xFEFF\) csvText = csvText.slice\(1\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  const lines = csvText.split\(/\\r?\\n/\).filter\(line => line.trim\(\) !== ""\);) Tj
+0 -12 Td
+(  if \(!lines.length\) return [];) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  // Parse headers usando la misma funcion de linea) Tj
+0 -12 Td
+(  const headers = parseCSVLine\(lines[0]\).map\(h => h.trim\(\)\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  const rows = lines.slice\(1\).map\(line => {) Tj
+0 -12 Td
+(    const cols = parseCSVLine\(line\);) Tj
+0 -12 Td
+(    const obj = {};) Tj
+0 -12 Td
+(    headers.forEach\(\(h, i\) => {) Tj
+0 -12 Td
+(      obj[h] = \(cols[i] || ""\).trim\(\);) Tj
+0 -12 Td
+(    }\);) Tj
+0 -12 Td
+(    return obj;) Tj
+0 -12 Td
+(  }\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  return rows;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// parsea una linea CSV respetando comillas dobles y comas internas) Tj
+0 -12 Td
+(function parseCSVLine\(line\) {) Tj
+0 -12 Td
+(  const result = [];) Tj
+0 -12 Td
+(  let cur = "";) Tj
+0 -12 Td
+(  let insideQuotes = false;) Tj
+0 -12 Td
+(  for \(let i = 0; i < line.length; i++\) {) Tj
+0 -12 Td
+(    const ch = line[i];) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    if \(ch === '"' \) {) Tj
+0 -12 Td
+(      // si es una comilla y la siguiente tambien es comilla -> escapada -> anadimos una) Tj
+0 -12 Td
+(comilla) Tj
+0 -12 Td
+(      if \(insideQuotes && line[i+1] === '"'\) {) Tj
+0 -12 Td
+(        cur += '"';) Tj
+0 -12 Td
+(        i++; // saltar la comilla escapada) Tj
+0 -12 Td
+(      } else {) Tj
+ET
+endstream
+endobj
+35 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 34 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+36 0 obj
+<< /Length 2424 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(        insideQuotes = !insideQuotes;) Tj
+0 -12 Td
+(      }) Tj
+0 -12 Td
+(    } else if \(ch === ',' && !insideQuotes\) {) Tj
+0 -12 Td
+(      result.push\(cur\);) Tj
+0 -12 Td
+(      cur = "";) Tj
+0 -12 Td
+(    } else {) Tj
+0 -12 Td
+(      cur += ch;) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(  result.push\(cur\);) Tj
+0 -12 Td
+(  return result;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// CARGA DESDE GOOGLE SHEETS \(CSV\) con fallback a JSON local) Tj
+0 -12 Td
+(fetch\("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNGZwo-97c1vhJdxEzrS4-) Tj
+0 -12 Td
+(RBL5PJuoPu_KGw5gdaTYIO61YwgkB76YSeDmuOKFXr7o9y_41LLYMFAf/pub?gid=0&single=true&output=csv"\)) Tj
+0 -12 Td
+(  .then\(res => res.text\(\)\)) Tj
+0 -12 Td
+(  .then\(csv => {) Tj
+0 -12 Td
+(    const parsed = parseCSV\(csv\);) Tj
+0 -12 Td
+(    initFlashcards\(parsed\);) Tj
+0 -12 Td
+(  }\)) Tj
+0 -12 Td
+(  .catch\(\(\) => {) Tj
+0 -12 Td
+(    console.warn\("Google Sheets no disponible. Usando JSON local..."\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(    fetch\("data.json"\)) Tj
+0 -12 Td
+(      .then\(res => res.json\(\)\)) Tj
+0 -12 Td
+(      .then\(data => initFlashcards\(data\)\)) Tj
+0 -12 Td
+(      .catch\(err => console.error\("Error al cargar JSON de fallback:", err\)\);) Tj
+0 -12 Td
+(  }\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// ELEMENTOS DEL DOM) Tj
+0 -12 Td
+(const flashcardEl = document.getElementById\('flashcard'\);) Tj
+0 -12 Td
+(const frontEl = flashcardEl.querySelector\('.front'\);) Tj
+0 -12 Td
+(const backEl = flashcardEl.querySelector\('.back'\);) Tj
+0 -12 Td
+(const nextBtn = document.getElementById\('nextBtn'\);) Tj
+0 -12 Td
+(const categorySelect = document.getElementById\('categorySelect'\);) Tj
+0 -12 Td
+(const modeSelect = document.getElementById\('modeSelect'\);) Tj
+0 -12 Td
+(const randomnessSelect = document.getElementById\('randomnessSelect'\);) Tj
+0 -12 Td
+(const avoidRepeatCheckbox = document.getElementById\('avoidRepeat'\);) Tj
+0 -12 Td
+(const markCorrectBtn = document.getElementById\('markCorrect'\);) Tj
+0 -12 Td
+(const markWrongBtn = document.getElementById\('markWrong'\);) Tj
+0 -12 Td
+(const resetProgressBtn = document.getElementById\('resetProgress'\);) Tj
+0 -12 Td
+(const statsText = document.getElementById\('statsText'\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// MOSTRAR TARJETA ACTUAL) Tj
+ET
+endstream
+endobj
+37 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 36 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+38 0 obj
+<< /Length 2031 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(function showFlashcard\(\) {) Tj
+0 -12 Td
+(  if \(!flashcardsData.length\) {) Tj
+0 -12 Td
+(    frontEl.textContent = "No hay tarjetas en las categorias seleccionadas";) Tj
+0 -12 Td
+(    backEl.textContent = "";) Tj
+0 -12 Td
+(    updateStatsUI\(\);) Tj
+0 -12 Td
+(    return;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(  const card = flashcardsData[currentIndex];) Tj
+0 -12 Td
+(  frontEl.textContent = card.question;) Tj
+0 -12 Td
+(  backEl.textContent = card.answer;) Tj
+0 -12 Td
+(  flashcardEl.classList.remove\('flipped'\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  registerSeen\(card\);) Tj
+0 -12 Td
+(  rememberRecent\(card._id\);) Tj
+0 -12 Td
+(  updateStatsUI\(\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// VOLTEAR TARJETA) Tj
+0 -12 Td
+(flashcardEl.addEventListener\('click', \(\) => toggleFlip\(\)\);) Tj
+0 -12 Td
+(flashcardEl.addEventListener\('keydown', \(e\) => {) Tj
+0 -12 Td
+(  if \(e.key === 'Enter' || e.key === ' '\) {) Tj
+0 -12 Td
+(    e.preventDefault\(\);) Tj
+0 -12 Td
+(    toggleFlip\(\);) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(}\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function toggleFlip\(\) {) Tj
+0 -12 Td
+(  flashcardEl.classList.toggle\('flipped'\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// SIGUIENTE TARJETA \(ALEATORIA\)) Tj
+0 -12 Td
+(nextBtn.addEventListener\('click', nextFlashcard\);) Tj
+0 -12 Td
+(function nextFlashcard\(\) {) Tj
+0 -12 Td
+(  if \(!flashcardsData.length\) return;) Tj
+0 -12 Td
+(  currentIndex = pickNextIndex\(\);) Tj
+0 -12 Td
+(  showFlashcard\(\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// CATEGORIAS AUTOMATICAS) Tj
+0 -12 Td
+(function initCategories\(\) {) Tj
+0 -12 Td
+(  // filtrar categorias validas \(no undefined ni vacias\)) Tj
+0 -12 Td
+(  const cats = originalData.map\(card => card.category\).filter\(Boolean\);) Tj
+0 -12 Td
+(  const categories = ["Todas", ...new Set\(cats\)];) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  // limpiar select si ya tiene opciones) Tj
+ET
+endstream
+endobj
+39 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 38 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+40 0 obj
+<< /Length 2413 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(  categorySelect.innerHTML = "";) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  // Hacer el select multiple) Tj
+0 -12 Td
+(  categorySelect.setAttribute\('multiple', 'true'\);) Tj
+0 -12 Td
+(  categorySelect.size = Math.min\(6, categories.length\); // Mostrar maximo 6 opciones a la vez) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  categories.forEach\(cat => {) Tj
+0 -12 Td
+(    const opt = document.createElement\("option"\);) Tj
+0 -12 Td
+(    opt.value = cat === "Todas" ? "all" : cat;) Tj
+0 -12 Td
+(    opt.textContent = cat;) Tj
+0 -12 Td
+(    categorySelect.appendChild\(opt\);) Tj
+0 -12 Td
+(  }\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  // Seleccionar "Todas" por defecto) Tj
+0 -12 Td
+(  selectedCategories.add\("all"\);) Tj
+0 -12 Td
+(  categorySelect.querySelector\('option[value="all"]'\).selected = true;) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  categorySelect.addEventListener\("change", handleCategorySelection\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// MANEJAR SELECCION MULTIPLE DE CATEGORIAS) Tj
+0 -12 Td
+(function handleCategorySelection\(\) {) Tj
+0 -12 Td
+(  const selectedOptions = Array.from\(categorySelect.selectedOptions\);) Tj
+0 -12 Td
+(  const selectedValues = selectedOptions.map\(opt => opt.value\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  // Manejar logica de seleccion) Tj
+0 -12 Td
+(  if \(selectedValues.includes\("all"\)\) {) Tj
+0 -12 Td
+(    // Si se selecciona "Todas", deseleccionar todo lo demas) Tj
+0 -12 Td
+(    selectedCategories.clear\(\);) Tj
+0 -12 Td
+(    selectedCategories.add\("all"\);) Tj
+0 -12 Td
+(    Array.from\(categorySelect.options\).forEach\(opt => {) Tj
+0 -12 Td
+(      opt.selected = opt.value === "all";) Tj
+0 -12 Td
+(    }\);) Tj
+0 -12 Td
+(  } else {) Tj
+0 -12 Td
+(    // Si se selecciona cualquier otra categoria, quitar "Todas") Tj
+0 -12 Td
+(    selectedCategories.delete\("all"\);) Tj
+0 -12 Td
+(    if \(selectedValues.length === 0\) {) Tj
+0 -12 Td
+(      // Si no hay nada seleccionado, seleccionar "Todas" por defecto) Tj
+0 -12 Td
+(      selectedCategories.add\("all"\);) Tj
+0 -12 Td
+(      categorySelect.querySelector\('option[value="all"]'\).selected = true;) Tj
+0 -12 Td
+(    } else {) Tj
+0 -12 Td
+(      // Agregar las categorias seleccionadas) Tj
+0 -12 Td
+(      selectedCategories.clear\(\);) Tj
+0 -12 Td
+(      selectedValues.forEach\(val => selectedCategories.add\(val\)\);) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+() Tj
+ET
+endstream
+endobj
+41 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 40 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+42 0 obj
+<< /Length 1956 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(  filterByCategories\(\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// FILTRAR POR MULTIPLES CATEGORIAS) Tj
+0 -12 Td
+(function filterByCategories\(\) {) Tj
+0 -12 Td
+(  if \(selectedCategories.has\("all"\)\) {) Tj
+0 -12 Td
+(    flashcardsData = [...originalData];) Tj
+0 -12 Td
+(  } else {) Tj
+0 -12 Td
+(    flashcardsData = originalData.filter\(c =>) Tj
+0 -12 Td
+(      c.category && selectedCategories.has\(c.category\)) Tj
+0 -12 Td
+(    \);) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(  shuffleFlashcards\(\); // Barajar al cambiar categorias) Tj
+0 -12 Td
+(  showFlashcard\(\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  // Actualizar texto del boton para mostrar cantidad) Tj
+0 -12 Td
+(  updateNextButtonText\(\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// ACTUALIZAR TEXTO DEL BOTON SIGUIENTE) Tj
+0 -12 Td
+(function updateNextButtonText\(\) {) Tj
+0 -12 Td
+(  const count = flashcardsData.length;) Tj
+0 -12 Td
+(  if \(count === 0\) {) Tj
+0 -12 Td
+(    nextBtn.textContent = "Siguiente \(0\)";) Tj
+0 -12 Td
+(    nextBtn.disabled = true;) Tj
+0 -12 Td
+(  } else {) Tj
+0 -12 Td
+(    nextBtn.textContent = `Siguiente \(${count}\)`;) Tj
+0 -12 Td
+(    nextBtn.disabled = false;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// CONTROLES DE PROGRESO Y MODO) Tj
+0 -12 Td
+(modeSelect.addEventListener\('change', \(\) => {) Tj
+0 -12 Td
+(  settings.mode = modeSelect.value;) Tj
+0 -12 Td
+(  saveSettings\(\);) Tj
+0 -12 Td
+(}\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(randomnessSelect.addEventListener\('change', \(\) => {) Tj
+0 -12 Td
+(  settings.randomness = randomnessSelect.value;) Tj
+0 -12 Td
+(  saveSettings\(\);) Tj
+0 -12 Td
+(}\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(avoidRepeatCheckbox.addEventListener\('change', \(\) => {) Tj
+0 -12 Td
+(  settings.avoidRepeat = avoidRepeatCheckbox.checked;) Tj
+0 -12 Td
+(  saveSettings\(\);) Tj
+ET
+endstream
+endobj
+43 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 42 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+44 0 obj
+<< /Length 2038 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(}\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(markCorrectBtn.addEventListener\('click', \(\) => markAnswer\(true\)\);) Tj
+0 -12 Td
+(markWrongBtn.addEventListener\('click', \(\) => markAnswer\(false\)\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(resetProgressBtn.addEventListener\('click', \(\) => {) Tj
+0 -12 Td
+(  progress = {};) Tj
+0 -12 Td
+(  originalData.forEach\(card => {) Tj
+0 -12 Td
+(    progress[card._id] = { correct: 0, wrong: 0, seen: 0 };) Tj
+0 -12 Td
+(  }\);) Tj
+0 -12 Td
+(  saveProgress\(\);) Tj
+0 -12 Td
+(  updateStatsUI\(\);) Tj
+0 -12 Td
+(}\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function markAnswer\(isCorrect\) {) Tj
+0 -12 Td
+(  if \(!flashcardsData.length\) return;) Tj
+0 -12 Td
+(  const card = flashcardsData[currentIndex];) Tj
+0 -12 Td
+(  const stats = progress[card._id];) Tj
+0 -12 Td
+(  if \(isCorrect\) {) Tj
+0 -12 Td
+(    stats.correct += 1;) Tj
+0 -12 Td
+(  } else {) Tj
+0 -12 Td
+(    stats.wrong += 1;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(  saveProgress\(\);) Tj
+0 -12 Td
+(  updateStatsUI\(\);) Tj
+0 -12 Td
+(  nextFlashcard\(\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// LOGICA DE ALEATORIEDAD INTELIGENTE) Tj
+0 -12 Td
+(function pickNextIndex\(\) {) Tj
+0 -12 Td
+(  if \(flashcardsData.length <= 1\) return 0;) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  const recentWindow = getRecentWindow\(\);) Tj
+0 -12 Td
+(  let candidates = flashcardsData.map\(\(card, index\) => \({ card, index }\)\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  if \(settings.avoidRepeat && recentWindow > 0\) {) Tj
+0 -12 Td
+(    candidates = candidates.filter\(c => !recentIds.includes\(c.card._id\)\);) Tj
+0 -12 Td
+(    if \(!candidates.length\) {) Tj
+0 -12 Td
+(      candidates = flashcardsData.map\(\(card, index\) => \({ card, index }\)\);) Tj
+0 -12 Td
+(    }) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  if \(settings.mode === 'random'\) {) Tj
+0 -12 Td
+(    const randomPick = Math.floor\(Math.random\(\) * candidates.length\);) Tj
+0 -12 Td
+(    return candidates[randomPick].index;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+() Tj
+ET
+endstream
+endobj
+45 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 44 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+46 0 obj
+<< /Length 2116 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(  const weights = candidates.map\(c => calcWeight\(c.card\)\);) Tj
+0 -12 Td
+(  const total = weights.reduce\(\(sum, w\) => sum + w, 0\);) Tj
+0 -12 Td
+(  let r = Math.random\(\) * total;) Tj
+0 -12 Td
+(  for \(let i = 0; i < candidates.length; i++\) {) Tj
+0 -12 Td
+(    r -= weights[i];) Tj
+0 -12 Td
+(    if \(r <= 0\) return candidates[i].index;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(  return candidates[candidates.length - 1].index;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function calcWeight\(card\) {) Tj
+0 -12 Td
+(  const stats = progress[card._id] || { correct: 0, wrong: 0, seen: 0 };) Tj
+0 -12 Td
+(  const score = stats.wrong - stats.correct;) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  let weight = 1 + Math.max\(0, score\) * 3 + stats.wrong * 1.2;) Tj
+0 -12 Td
+(  if \(stats.seen === 0\) weight += 2;) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  const jitter = getRandomnessJitter\(\);) Tj
+0 -12 Td
+(  weight = Math.max\(0.2, weight * jitter\);) Tj
+0 -12 Td
+(  return weight;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function getRandomnessJitter\(\) {) Tj
+0 -12 Td
+(  if \(settings.randomness === 'soft'\) {) Tj
+0 -12 Td
+(    return 1 + \(Math.random\(\) * 0.3 - 0.15\);) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(  if \(settings.randomness === 'chaos'\) {) Tj
+0 -12 Td
+(    return 1 + \(Math.random\(\) * 1.2 - 0.6\);) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(  return 1 + \(Math.random\(\) * 0.6 - 0.3\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function getRecentWindow\(\) {) Tj
+0 -12 Td
+(  if \(!settings.avoidRepeat\) return 0;) Tj
+0 -12 Td
+(  if \(settings.randomness === 'soft'\) return 2;) Tj
+0 -12 Td
+(  if \(settings.randomness === 'chaos'\) return 5;) Tj
+0 -12 Td
+(  return 3;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function rememberRecent\(id\) {) Tj
+0 -12 Td
+(  const limit = getRecentWindow\(\);) Tj
+0 -12 Td
+(  if \(limit <= 0\) return;) Tj
+0 -12 Td
+(  recentIds = recentIds.filter\(x => x !== id\);) Tj
+0 -12 Td
+(  recentIds.push\(id\);) Tj
+0 -12 Td
+(  if \(recentIds.length > limit\) {) Tj
+0 -12 Td
+(    recentIds = recentIds.slice\(recentIds.length - limit\);) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(}) Tj
+ET
+endstream
+endobj
+47 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 46 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+48 0 obj
+<< /Length 2055 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// ESTADISTICAS) Tj
+0 -12 Td
+(function updateStatsUI\(\) {) Tj
+0 -12 Td
+(  if \(!flashcardsData.length\) {) Tj
+0 -12 Td
+(    statsText.textContent = "Sin tarjetas para mostrar";) Tj
+0 -12 Td
+(    return;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  const card = flashcardsData[currentIndex];) Tj
+0 -12 Td
+(  const stats = progress[card._id] || { correct: 0, wrong: 0, seen: 0 };) Tj
+0 -12 Td
+(  const score = stats.wrong - stats.correct;) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  const totals = flashcardsData.reduce\(\(acc, c\) => {) Tj
+0 -12 Td
+(    const s = progress[c._id] || { correct: 0, wrong: 0, seen: 0 };) Tj
+0 -12 Td
+(    acc.correct += s.correct;) Tj
+0 -12 Td
+(    acc.wrong += s.wrong;) Tj
+0 -12 Td
+(    acc.seen += s.seen;) Tj
+0 -12 Td
+(    return acc;) Tj
+0 -12 Td
+(  }, { correct: 0, wrong: 0, seen: 0 }\);) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(  statsText.textContent = `Tarjetas: ${flashcardsData.length} | Vistas: ${totals.seen} |) Tj
+0 -12 Td
+(Aciertos: ${totals.correct} | Fallos: ${totals.wrong} | Actual score: ${score}`;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function registerSeen\(card\) {) Tj
+0 -12 Td
+(  const stats = progress[card._id];) Tj
+0 -12 Td
+(  stats.seen += 1;) Tj
+0 -12 Td
+(  saveProgress\(\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(// ======================) Tj
+0 -12 Td
+(// STORAGE) Tj
+0 -12 Td
+(function createCardId\(card\) {) Tj
+0 -12 Td
+(  const raw = `${card.question}||${card.answer}||${card.category || ''}`;) Tj
+0 -12 Td
+(  let hash = 0;) Tj
+0 -12 Td
+(  for \(let i = 0; i < raw.length; i++\) {) Tj
+0 -12 Td
+(    hash = \(\(hash << 5\) - hash\) + raw.charCodeAt\(i\);) Tj
+0 -12 Td
+(    hash |= 0;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(  return `card_${Math.abs\(hash\)}`;) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function loadProgress\(\) {) Tj
+0 -12 Td
+(  try {) Tj
+0 -12 Td
+(    const raw = localStorage.getItem\(STORAGE_PROGRESS_KEY\);) Tj
+0 -12 Td
+(    return raw ? JSON.parse\(raw\) : {};) Tj
+0 -12 Td
+(  } catch \(e\) {) Tj
+ET
+endstream
+endobj
+49 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 48 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+50 0 obj
+<< /Length 1469 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(    return {};) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function saveProgress\(\) {) Tj
+0 -12 Td
+(  localStorage.setItem\(STORAGE_PROGRESS_KEY, JSON.stringify\(progress\)\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function loadSettings\(\) {) Tj
+0 -12 Td
+(  const defaults = { mode: 'smart', randomness: 'normal', avoidRepeat: true };) Tj
+0 -12 Td
+(  try {) Tj
+0 -12 Td
+(    const raw = localStorage.getItem\(STORAGE_SETTINGS_KEY\);) Tj
+0 -12 Td
+(    if \(!raw\) return defaults;) Tj
+0 -12 Td
+(    const parsed = JSON.parse\(raw\);) Tj
+0 -12 Td
+(    return {) Tj
+0 -12 Td
+(      mode: parsed.mode === 'random' ? 'random' : 'smart',) Tj
+0 -12 Td
+(      randomness: ['soft', 'normal', 'chaos'].includes\(parsed.randomness\) ? parsed.randomness :) Tj
+0 -12 Td
+('normal',) Tj
+0 -12 Td
+(      avoidRepeat: typeof parsed.avoidRepeat === 'boolean' ? parsed.avoidRepeat : true) Tj
+0 -12 Td
+(    };) Tj
+0 -12 Td
+(  } catch \(e\) {) Tj
+0 -12 Td
+(    return defaults;) Tj
+0 -12 Td
+(  }) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function saveSettings\(\) {) Tj
+0 -12 Td
+(  localStorage.setItem\(STORAGE_SETTINGS_KEY, JSON.stringify\(settings\)\);) Tj
+0 -12 Td
+(}) Tj
+0 -12 Td
+() Tj
+0 -12 Td
+(function applySettingsToUI\(\) {) Tj
+0 -12 Td
+(  modeSelect.value = settings.mode;) Tj
+0 -12 Td
+(  randomnessSelect.value = settings.randomness;) Tj
+0 -12 Td
+(  avoidRepeatCheckbox.checked = settings.avoidRepeat;) Tj
+0 -12 Td
+(}) Tj
+ET
+endstream
+endobj
+51 0 obj
+<< /Type /Page /Parent 52 0 R /MediaBox [0 0 612 792] /Contents 50 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+52 0 obj
+<< /Type /Pages /Kids [ 3 0 R 5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R 23 0 R 25 0 R 27 0 R 29 0 R 31 0 R 33 0 R 35 0 R 37 0 R 39 0 R 41 0 R 43 0 R 45 0 R 47 0 R 49 0 R 51 0 R ] /Count 25 >>
+endobj
+53 0 obj
+<< /Type /Catalog /Pages 52 0 R >>
+endobj
+xref
+0 54
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000003142 00000 n 
+0000003269 00000 n 
+0000006548 00000 n 
+0000006675 00000 n 
+0000009229 00000 n 
+0000009356 00000 n 
+0000012245 00000 n 
+0000012372 00000 n 
+0000014438 00000 n 
+0000014567 00000 n 
+0000016347 00000 n 
+0000016476 00000 n 
+0000018098 00000 n 
+0000018227 00000 n 
+0000020044 00000 n 
+0000020173 00000 n 
+0000021808 00000 n 
+0000021937 00000 n 
+0000023719 00000 n 
+0000023848 00000 n 
+0000025574 00000 n 
+0000025703 00000 n 
+0000027629 00000 n 
+0000027758 00000 n 
+0000029529 00000 n 
+0000029658 00000 n 
+0000031218 00000 n 
+0000031347 00000 n 
+0000032842 00000 n 
+0000032971 00000 n 
+0000034935 00000 n 
+0000035064 00000 n 
+0000037342 00000 n 
+0000037471 00000 n 
+0000039948 00000 n 
+0000040077 00000 n 
+0000042161 00000 n 
+0000042290 00000 n 
+0000044756 00000 n 
+0000044885 00000 n 
+0000046894 00000 n 
+0000047023 00000 n 
+0000049114 00000 n 
+0000049243 00000 n 
+0000051412 00000 n 
+0000051541 00000 n 
+0000053649 00000 n 
+0000053778 00000 n 
+0000055300 00000 n 
+0000055429 00000 n 
+0000055655 00000 n 
+trailer
+<< /Size 54 /Root 53 0 R >>
+startxref
+55706
+%%EOF
